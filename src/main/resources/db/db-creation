@@ -1,46 +1,46 @@
 CREATE DATABASE movieland
-  WITH OWNER = postgres
-       ENCODING = 'UTF8'
-       TABLESPACE = pg_default
-       LC_COLLATE = 'Russian_Russia.1251'
-       LC_CTYPE = 'Russian_Russia.1251'
-       CONNECTION LIMIT = -1;
+WITH OWNER = postgres
+ENCODING = 'UTF8'
+TABLESPACE = pg_default
+LC_COLLATE = 'Russian_Russia.1251'
+LC_CTYPE = 'Russian_Russia.1251'
+CONNECTION LIMIT = -1;
 
 COMMENT ON DATABASE movieland
-  IS 'movieland database';
+IS 'movieland database';
 
-create table GENRE  (
-id SERIAL PRIMARY KEY NOT NULL,
-genre CHAR (250) NOT NULL,
-sys_upd TIMESTAMP
-)
+create table IF NOT EXISTS GENRE  (
+  id SERIAL PRIMARY KEY NOT NULL,
+  genre CHAR (250) NOT NULL,
+  sys_upd TIMESTAMP
+);
 
-create table MOVIE  (
-id SERIAL PRIMARY KEY NOT NULL,
-name CHAR (250) NOT NULL,
-year date,
-country CHAR (250),
-genre CHAR (250),
-description text,
-rating real,
-price real,
-sys_upd TIMESTAMP
-)
+create table IF NOT EXISTS MOVIE  (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name CHAR (250) NOT NULL,
+  year date,
+  country CHAR (250),
+  genre CHAR (250),
+  description text,
+  rating real,
+  price real,
+  sys_upd TIMESTAMP
+);
 
-create table REVIEW  (
-id SERIAL PRIMARY KEY NOT NULL,
-movie_name CHAR (250) NOT NULL,
-user_name CHAR (250),
-sys_upd TIMESTAMP
-)
+create table IF NOT EXISTS REVIEW  (
+  id SERIAL PRIMARY KEY NOT NULL,
+  movie_name CHAR (250) NOT NULL,
+  user_name CHAR (250),
+  sys_upd TIMESTAMP
+);
 
-create table USERS  (
-id SERIAL PRIMARY KEY NOT NULL,
-name CHAR (250) NOT NULL,
-mail CHAR (250),
-password CHAR (50),
-sys_upd TIMESTAMP
-)
+create table IF NOT EXISTS USERS  (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name CHAR (250) NOT NULL,
+  mail CHAR (250),
+  password CHAR (50),
+  sys_upd TIMESTAMP
+);
 
 --DROP table GENRE;
 --DROP table MOVIE;
