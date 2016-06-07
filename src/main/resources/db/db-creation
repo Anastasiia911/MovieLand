@@ -12,36 +12,39 @@ IS 'movieland database';
 create table IF NOT EXISTS GENRE  (
   id SERIAL PRIMARY KEY NOT NULL,
   genre CHAR (250) NOT NULL,
-  sys_upd TIMESTAMP
+  sys_upd TIMESTAMP default current_timestamp not null
 );
+
 
 create table IF NOT EXISTS MOVIE  (
   id SERIAL PRIMARY KEY NOT NULL,
   name CHAR (250) NOT NULL,
-  year date,
+  release_year date,
   country CHAR (250),
   genre CHAR (250),
-  description text,
+  description varchar(10000),
   rating real,
   price real,
-  sys_upd TIMESTAMP
+  sys_upd TIMESTAMP default current_timestamp not null
 );
 
-create table IF NOT EXISTS REVIEW  (
-  id SERIAL PRIMARY KEY NOT NULL,
-  movie_name CHAR (250) NOT NULL,
-  user_name CHAR (250),
-  sys_upd TIMESTAMP
-);
 
 create table IF NOT EXISTS USERS  (
   id SERIAL PRIMARY KEY NOT NULL,
   name CHAR (250) NOT NULL,
-  mail CHAR (250),
-  password CHAR (50),
-  sys_upd TIMESTAMP
+  mail CHAR (250) NOT NULL,
+  password CHAR (250) NOT NULL,
+  is_admin boolean default false not null,
+  sys_upd TIMESTAMP default current_timestamp not null
 );
 
+create table IF NOT EXISTS REVIEW  (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id integer references USERS(id),
+  movie_id integer references MOVIE(id),
+  description varchar(10000),
+  sys_upd TIMESTAMP default current_timestamp not null
+);
 --DROP table GENRE;
 --DROP table MOVIE;
 --DROP table REVIEW;
