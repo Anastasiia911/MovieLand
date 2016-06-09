@@ -1,5 +1,7 @@
 package com.nabivach.myentity;
 
+import java.util.List;
+
 /**
  * Created by grey3 on 08.06.2016.
  */
@@ -76,6 +78,12 @@ public class Movie {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie ( id ="+id+", name="+name+", release_year="+release_year+", country"+country+" , genre"
+                + genre+", description="+description +", rating="+rating+", price="+price;
     }
 }
 
