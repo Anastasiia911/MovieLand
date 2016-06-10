@@ -23,9 +23,6 @@ public class JdbcMovieDaoImpl implements MovieDao {
    // String sql = "SELECT NAME, RELEASE_YEAR, RATING, GENRE FROM MOVIE";
 
     @Autowired
-    DataSource dataSource;
-
-    @Autowired
     JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -34,10 +31,10 @@ public class JdbcMovieDaoImpl implements MovieDao {
 
     public List<?> getAllMovies()
     {
-       List <Movie> allMovies = new ArrayList<Movie>();
-       allMovies = jdbcTemplate.query(getAllMoviesSQL, new MovieRowMapper());
+       List <Movie> allMovies = jdbcTemplate.query(getAllMoviesSQL, new MovieRowMapper());
         return allMovies;
-    }}
+    }
+}
 
 
 

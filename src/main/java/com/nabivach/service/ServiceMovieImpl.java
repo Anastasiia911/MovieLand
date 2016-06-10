@@ -10,11 +10,10 @@ import java.util.List;
 /**
  * Created by grey3 on 08.06.2016.
  */
-public class ServiceMovieImpl implements ServiceMovie{
+public class ServiceMovieImpl implements ServiceMovie {
+     private JdbcMovieDaoImpl movieDao = new JdbcMovieDaoImpl();
 
-     private MovieDao movieDao;
-
-        public List<?> getAllMovies()throws Exception{
+        public List<?> getAllMovies(){
 
         return movieDao.getAllMovies();
     }

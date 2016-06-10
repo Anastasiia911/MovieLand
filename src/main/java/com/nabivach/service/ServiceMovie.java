@@ -14,7 +14,6 @@ import java.util.List;
 
 @Service
 public interface ServiceMovie {
-
-    public List<?> getAllMovies() throws SQLException, Exception;
+    public List<?> getAllMovies();
 
 }

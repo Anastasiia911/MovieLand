@@ -12,5 +12,5 @@ import java.util.List;
 //DAO as light as possible and exists to provide a connection to the DB
 
 public interface MovieDao {
-    List<?> getAllMovies() throws SQLException;
+    List<?> getAllMovies();
 }
