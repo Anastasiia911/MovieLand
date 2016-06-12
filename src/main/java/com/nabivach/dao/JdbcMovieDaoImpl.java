@@ -1,17 +1,12 @@
 package com.nabivach.dao;
 
 import com.nabivach.myentity.Movie;
-import java.util.ArrayList;
-import java.util.List;
-import java.sql.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import javax.sql.DataSource;
-
-import static java.sql.DriverManager.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by grey3 on 08.06.2016.
@@ -29,9 +24,10 @@ public class JdbcMovieDaoImpl implements MovieDao {
     String getAllMoviesSQL;
 
 
-    public List<?> getAllMovies()
+    public List<Movie> getAllMovies()
     {
-       List <Movie> allMovies = jdbcTemplate.query(getAllMoviesSQL, new MovieRowMapper());
+        System.out.println(getAllMoviesSQL);
+       List <Movie> allMovies = new ArrayList<Movie>(); //jdbcTemplate.query(getAllMoviesSQL, new MovieRowMapper());
         return allMovies;
     }
 }

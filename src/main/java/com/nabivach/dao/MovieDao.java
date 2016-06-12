@@ -2,7 +2,6 @@ package com.nabivach.dao;
 
 import com.nabivach.myentity.Movie;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -12,5 +11,5 @@ import java.util.List;
 //DAO as light as possible and exists to provide a connection to the DB
 
 public interface MovieDao {
-    List<?> getAllMovies();
+    List<Movie> getAllMovies();
 }

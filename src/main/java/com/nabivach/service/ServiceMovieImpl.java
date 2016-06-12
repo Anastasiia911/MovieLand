@@ -1,21 +1,23 @@
 package com.nabivach.service;
 
 import com.nabivach.dao.JdbcMovieDaoImpl;
-import com.nabivach.dao.MovieDao;
-import com.sun.org.apache.xpath.internal.SourceTree;
+import com.nabivach.myentity.Movie;
+import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
  * Created by grey3 on 08.06.2016.
  */
+
+@Component
+
 public class ServiceMovieImpl implements ServiceMovie {
      private JdbcMovieDaoImpl movieDao = new JdbcMovieDaoImpl();
 
-        public List<?> getAllMovies(){
+        public List<Movie> getAllMovies(){
 
-        return movieDao.getAllMovies();
+        return (List<Movie>) movieDao.getAllMovies();
     }
 
 }

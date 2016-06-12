@@ -29,16 +29,6 @@
         <constructor-arg value="SELECT NAME, RELEASE_YEAR, RATING, GENRE FROM MOVIE"/>
     </bean>
 
-
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <ref bean="jsonConverter"/>
-
-            </list>
-        </property>
-    </bean>
-
           <!-- JSON CONVERTER-->
 
     <bean id="jsonConverter"

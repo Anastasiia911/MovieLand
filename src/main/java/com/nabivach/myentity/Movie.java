@@ -1,7 +1,5 @@
 package com.nabivach.myentity;
 
-import java.util.List;
-
 /**
  * Created by grey3 on 08.06.2016.
  */

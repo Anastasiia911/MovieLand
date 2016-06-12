@@ -1,31 +1,29 @@
 package com.nabivach.util;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.nabivach.myentity.Movie;
 import com.nabivach.service.ServiceMovie;
 import com.nabivach.service.ServiceMovieImpl;
+import org.springframework.stereotype.Component;
 
-import java.io.FileOutputStream;
+import java.util.List;
 
 /**
  * Created by anabivach on 08/06/2016.
  */
-
-public class ConvertJSONImpl implements ConvertJSON {
+@Component
+public class ConvertJSONImpl implements ConvertJson {
 
      ServiceMovie servicemovie = new ServiceMovieImpl();
+    List<?> movieList = servicemovie.getAllMovies();
 
-     public String  JsonConverter()  {
+    public String ObjectToJsonConverter(Object object) {
 
-         //Object to JSON STRING
-         Gson gson = new Gson();
-         String jsonString = gson.toJson(servicemovie.getAllMovies());
-         System.out.println("json " + jsonString);
+        //Object to JSON STRING
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(movieList);
+        System.out.println("json " + jsonString);
 
-      return jsonString ;
-
+        return jsonString ;
+       // return null;
     }
-
-    }
+}

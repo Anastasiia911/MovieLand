@@ -1,9 +1,7 @@
 package com.nabivach.service;
 
 import com.nabivach.myentity.Movie;
-import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -12,8 +10,8 @@ import java.util.List;
 
 //SERVICE LAYER is there to provide logic to operate on the data sent to and from the DAO
 
-@Service
+
 public interface ServiceMovie {
-    public List<?> getAllMovies();
+    public List<Movie> getAllMovies();
 
 }
