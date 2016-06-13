@@ -1,5 +1,7 @@
 package com.nabivach.entity;
 
+import java.util.List;
+
 /**
  * Created by grey3 on 08.06.2016.
  */
@@ -9,9 +11,9 @@ public class Movie {
     private int id;
     private String name;
     private int release_year;
-    private Country country;
-    private Genre genre;
-    private char description;
+    private List<Country> country;
+    private List<Genre> genre;
+    private String description;
     private double rating;
     private double price;
 
@@ -31,27 +33,27 @@ public class Movie {
         this.name = name;
     }
 
-    public Country getCountry() {
+    public List<Country> getCountry() {
         return country;
     }
 
-    public void setCountry(Country country) {
+    public void setCountry(List<Country> country) {
         this.country = country;
     }
 
-    public Genre getGenre() {
+    public List<Genre> getGenre() {
         return genre;
     }
 
-    public void setGenre(Genre genre) {
+    public void setGenre(List<Genre> genre) {
         this.genre = genre;
     }
 
-    public char getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(char description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 

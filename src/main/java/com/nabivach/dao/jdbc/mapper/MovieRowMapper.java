@@ -12,15 +12,14 @@ import java.sql.SQLException;
  */
 public class MovieRowMapper implements RowMapper<Movie> {
 
-      public Movie mapRow(ResultSet rs, int i) throws SQLException {
+    public Movie mapRow(ResultSet rs, int i) throws SQLException {
 
-            Movie moviepreview = new Movie();
-            moviepreview.setName(rs.getString("name"));
-            moviepreview.setRelease_year(rs.getInt("release_year"));
-            moviepreview.setRating(rs.getInt("rating"));
-           // moviepreview.setGenre(rs.getObject(GenreDao.getGenre()));
+        Movie movie = new Movie();
+        movie.setName(rs.getString("name"));
+        movie.setRelease_year(rs.getInt("release_year"));
+        movie.setRating(rs.getDouble("rating"));
 
 
-        return moviepreview;
+        return movie;
     }
 }

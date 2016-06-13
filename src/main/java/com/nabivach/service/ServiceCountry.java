@@ -1,5 +1,6 @@
 package com.nabivach.service;
 
+import com.nabivach.entity.Country;
 import com.nabivach.entity.Movie;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 //SERVICE LAYER is there to provide logic to operate on the data sent to and from the DAO
 
 
-public interface ServiceMovie {
-    List<Movie> getAllMovies();
+public interface ServiceCountry {
+   List<Country> getCountryForMovies(int movieId);
 
 }

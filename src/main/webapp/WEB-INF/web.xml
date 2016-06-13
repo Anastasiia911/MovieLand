@@ -8,20 +8,20 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-
     <servlet-mapping>
         <servlet-name>MovieLand</servlet-name>
-        <url-pattern>*.htm</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    <welcome-file-list>
-        <welcome-file>
-            index.jsp
-        </welcome-file>
-    </welcome-file-list>
+
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:/spring/context.xml</param-value>
+    </context-param>
 
 
 </web-app>

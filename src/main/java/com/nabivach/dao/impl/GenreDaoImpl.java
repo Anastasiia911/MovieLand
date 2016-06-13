@@ -21,22 +21,24 @@ import java.util.List;
 @Repository //Mark as SPRING bean
 
 public class GenreDaoImpl implements GenreDao {
-   // String sql = "SELECT m.name, m.release_year, m.rating, g.name  FROM MOVIE m join movie_ganre mg on m.id = mg.movie_id  join genre g on mg.genre_id = g.id;";
+    // String sql = "SELECT m.name, m.release_year, m.rating, g.name  FROM MOVIE m join movie_ganre mg on m.id = mg.movie_id  join genre g on mg.genre_id = g.id;";
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(GenreDaoImpl.class);
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private String getGenresForMovieSQL;
 
-    @Autowired
-    String getGenresSQL;
+    private GenreRowMapper genreRowMapper = new GenreRowMapper();
 
-
-        public List<Genre> getGenreforMovie() {
+    public List<Genre> getGenreForMovie(int movieId) {
         //System.out.println(getAllMoviesSQL);
-        final Logger LOGGER = LoggerFactory.getLogger(ServiceMovie.class);
-        LOGGER.debug("Starting execution SQL query...");
-        long startTime =System.currentTimeMillis();
 
-        List <Genre> genreList = jdbcTemplate.query(getGenresSQL, new GenreRowMapper());
+        LOGGER.debug("Starting execution SQL query...");
+        long startTime = System.currentTimeMillis();
+
+        List<Genre> genreList = jdbcTemplate.query(getGenresForMovieSQL, new Object[]{movieId}, genreRowMapper);
 
         long time = System.currentTimeMillis() - startTime;
         LOGGER.info("Result getGenres was received. It took {} ms", time);
@@ -44,6 +46,7 @@ public class GenreDaoImpl implements GenreDao {
 
         return genreList;
     }
+
 }
 
 

@@ -19,22 +19,24 @@ import org.slf4j.LoggerFactory;
 
 public class MovieDaoImpl implements MovieDao {
    // String sql = "SELECT m.name, m.release_year, m.rating, g.name  FROM MOVIE m join movie_ganre mg on m.id = mg.movie_id  join genre g on mg.genre_id = g.id;";
+  private final static Logger LOGGER = LoggerFactory.getLogger(MovieDaoImpl.class);
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    String getAllMoviesSQL;
+    private String getAllMoviesSQL;
 
+    private  MovieRowMapper movieRowMapper = new MovieRowMapper();
 
     public List<Movie> getAllMovies()
     {
         //System.out.println(getAllMoviesSQL);
-        final Logger LOGGER = LoggerFactory.getLogger(ServiceMovie.class);
+
         LOGGER.debug("Starting execution SQL query...");
         long startTime =System.currentTimeMillis();
 
-        List <Movie> allMovies = jdbcTemplate.query(getAllMoviesSQL, new MovieRowMapper());
+        List <Movie> allMovies = jdbcTemplate.query(getAllMoviesSQL,movieRowMapper);
 
         long time = System.currentTimeMillis() - startTime;
         LOGGER.info("Result AllMovies was received. It took {} ms", time);

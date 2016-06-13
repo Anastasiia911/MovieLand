@@ -1,8 +1,12 @@
-package com.nabivach.service;
+package com.nabivach.service.impl;
 
+import com.nabivach.dao.MovieDao;
 import com.nabivach.dao.impl.MovieDaoImpl;
 import com.nabivach.entity.Movie;
+import com.nabivach.service.ServiceMovie;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -10,10 +14,11 @@ import java.util.List;
  * Created by grey3 on 08.06.2016.
  */
 
-@Component
-
+@Service
 public class ServiceMovieImpl implements ServiceMovie {
-     private MovieDaoImpl movieDao = new MovieDaoImpl();
+
+    @Autowired
+     private MovieDao movieDao;
 
         public List<Movie> getAllMovies(){
 

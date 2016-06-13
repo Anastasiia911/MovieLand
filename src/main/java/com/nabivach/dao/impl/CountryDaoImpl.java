@@ -20,20 +20,22 @@ import java.util.List;
 
 @Repository //Mark as SPRING bean
 public class CountryDaoImpl implements CountryDao {
+   private  final static Logger LOGGER = LoggerFactory.getLogger(ServiceMovie.class);
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
     @Autowired
-    String getCountryForMovieSQL;
+    private String getCountryForMovieSQL;
 
-    public List<Country> getCountryForMovie() {
+    CountryRowMapper countryRowMapper = new CountryRowMapper();
+    public List<Country> getCountryForMovie(int movieId) {
 
         //System.out.println(getAllMoviesSQL);
-        final Logger LOGGER = LoggerFactory.getLogger(ServiceMovie.class);
+
         LOGGER.debug("Starting execution SQL query...");
         long startTime =System.currentTimeMillis();
 
-        List <Country> countryList = jdbcTemplate.query(getCountryForMovieSQL, new CountryRowMapper());
+        List <Country> countryList = jdbcTemplate.query(getCountryForMovieSQL, new Object[]{movieId}, countryRowMapper);
 
         long time = System.currentTimeMillis() - startTime;
         LOGGER.info("Result getCountryForMovie was received. It took {} ms", time);

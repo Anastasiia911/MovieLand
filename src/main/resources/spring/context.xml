@@ -7,13 +7,15 @@
     <context:annotation-config></context:annotation-config>
     <context:component-scan base-package="com.nabivach"/>
 
-
     <!--DAO BEAN-->
 
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="url" value="jdbc:postgresql://127.0.0.1:5432/movieland"/>
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/movieland"/>
         <property name="username" value="postgres"/>
         <property name="password" value="root"/>
+        <property name="initialSize" value="20"/>
+        <property name="maxTotal" value="60"/>
     </bean>
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
@@ -23,19 +25,19 @@
     <!-- QUERY BEANS STRING CLASS-->
 
     <bean id="getAllMoviesSQL" class="java.lang.String">
-        <constructor-arg value="SELECT NAME, RELEASE_YEAR, RATING FROM MOVIE"/>
+        <constructor-arg value="select name, release_year, RATING from movie"/>
     </bean>
 
     <bean id="getCountryForMovieSQL" class="java.lang.String">
-        <constructor-arg value=""/>
+        <constructor-arg value="select c.* from movie_country mc join country c on mc.country_id = c.id where mc.movie_id = ?"/>
     </bean>
 
-    <bean id="getGenresSQL" class="java.lang.String">
-        <constructor-arg value="SELECT * FROM Genre where id = ;"/>
+    <bean id="getGenresForMovieSQL" class="java.lang.String">
+        <constructor-arg value="select g.* from movie_ganre mg join genre g on mg.genre_id = g.id where mg.movie_id = ?"/>
     </bean>
 
-    <bean id="getReviewforMovieSQL" class="java.lang.String">
-        <constructor-arg value=""/>
+    <bean id="getReviewForMovieSQL" class="java.lang.String">
+        <constructor-arg value="select rv.* from review rv where rv.movie_id = ? limit ?"/>
     </bean>
 
           <!-- JSON CONVERTER-->
