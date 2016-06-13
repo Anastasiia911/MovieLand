@@ -1,5 +1,6 @@
 package com.nabivach.dao;
 
+import com.nabivach.entity.Country;
 import com.nabivach.entity.Movie;
 
 import java.util.List;
@@ -10,6 +11,6 @@ import java.util.List;
 
 //DAO as light as possible and exists to provide a connection to the DB
 
-public interface MovieDao {
-    List<Movie> getAllMovies();
+public interface CountryDao {
+    List<Country> getCountryForMovie();
 }

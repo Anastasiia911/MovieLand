@@ -1,6 +1,6 @@
 package com.nabivach.service;
 
-import com.nabivach.myentity.Movie;
+import com.nabivach.entity.Movie;
 
 import java.util.List;
 

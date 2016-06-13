@@ -1,6 +1,7 @@
-package com.nabivach.dao;
+package com.nabivach.dao.jdbc.mapper;
 
-import com.nabivach.myentity.Movie;
+import com.nabivach.dao.GenreDao;
+import com.nabivach.entity.Movie;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -14,10 +15,10 @@ public class MovieRowMapper implements RowMapper<Movie> {
       public Movie mapRow(ResultSet rs, int i) throws SQLException {
 
             Movie moviepreview = new Movie();
-            moviepreview.setName(rs.getString("NAME"));
-            moviepreview.setName(rs.getString("RELEASE_YEAR"));
-            moviepreview.setName(rs.getString("RATING"));
-            moviepreview.setName(rs.getString("GENRE"));
+            moviepreview.setName(rs.getString("name"));
+            moviepreview.setRelease_year(rs.getInt("release_year"));
+            moviepreview.setRating(rs.getInt("rating"));
+           // moviepreview.setGenre(rs.getObject(GenreDao.getGenre()));
 
 
         return moviepreview;

@@ -1,5 +1,5 @@
 package com.nabivach.controllerMovie;
-import com.nabivach.myentity.Movie;
+import com.nabivach.entity.Movie;
 import com.nabivach.service.ServiceMovieImpl;
 import com.nabivach.util.ConvertJSONImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +24,12 @@ public class MovieControllerJson {
     @Autowired
     private ConvertJSONImpl ConvertJson;
 
-//    @org.springframework.stereotype.Controller
     @RequestMapping(name ="/v1/movie", method = RequestMethod.GET)
     @ResponseBody
 
    public String getMovieListInJSON(@PathVariable String name) {
-
         List<Movie> MovieList=  ServiceMovieImpl.getAllMovies();
-
-
                return ConvertJson.ObjectToJsonConverter(MovieList);
-
     }
 
 }

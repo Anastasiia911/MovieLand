@@ -1,7 +1,7 @@
 package com.nabivach.service;
 
-import com.nabivach.dao.JdbcMovieDaoImpl;
-import com.nabivach.myentity.Movie;
+import com.nabivach.dao.impl.MovieDaoImpl;
+import com.nabivach.entity.Movie;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,11 +13,11 @@ import java.util.List;
 @Component
 
 public class ServiceMovieImpl implements ServiceMovie {
-     private JdbcMovieDaoImpl movieDao = new JdbcMovieDaoImpl();
+     private MovieDaoImpl movieDao = new MovieDaoImpl();
 
         public List<Movie> getAllMovies(){
 
-        return (List<Movie>) movieDao.getAllMovies();
+        return  movieDao.getAllMovies();
     }
 
 }

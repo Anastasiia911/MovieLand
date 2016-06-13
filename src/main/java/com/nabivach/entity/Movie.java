@@ -1,4 +1,4 @@
-package com.nabivach.myentity;
+package com.nabivach.entity;
 
 /**
  * Created by grey3 on 08.06.2016.
@@ -8,12 +8,12 @@ public class Movie {
 
     private int id;
     private String name;
-    private char release_year;
-    private char country;
-    private char genre;
+    private int release_year;
+    private Country country;
+    private Genre genre;
     private char description;
-    private int rating;
-    private int price;
+    private double rating;
+    private double price;
 
     public int getId() {
         return id;
@@ -31,27 +31,19 @@ public class Movie {
         this.name = name;
     }
 
-    public char getRelease_year() {
-        return release_year;
-    }
-
-    public void setRelease_year(char release_year) {
-        this.release_year = release_year;
-    }
-
-    public char getCountry() {
+    public Country getCountry() {
         return country;
     }
 
-    public void setCountry(char country) {
+    public void setCountry(Country country) {
         this.country = country;
     }
 
-    public char getGenre() {
+    public Genre getGenre() {
         return genre;
     }
 
-    public void setGenre(char genre) {
+    public void setGenre(Genre genre) {
         this.genre = genre;
     }
 
@@ -63,26 +55,34 @@ public class Movie {
         this.description = description;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getRelease_year() {
+        return release_year;
+    }
+
+    public void setRelease_year(int release_year) {
+        this.release_year = release_year;
     }
 
     @Override
     public String toString() {
-        return "Movie ( id ="+id+", name="+name+", release_year="+release_year+", country"+country+" , genre"
-                + genre+", description="+description +", rating="+rating+", price="+price;
+        return "Movie { id ="+id+", name="+name+", release_year="+release_year+", country"+country+" , genre"
+                + genre+", description="+description +", rating="+rating+", price="+price+'\''+'}';
     }
 }
 

@@ -1,51 +1,72 @@
-CREATE DATABASE movieland
-WITH OWNER = postgres
-ENCODING = 'UTF8'
-TABLESPACE = pg_default
-LC_COLLATE = 'Russian_Russia.1251'
-LC_CTYPE = 'Russian_Russia.1251'
-CONNECTION LIMIT = -1;
+/*
+drop table genre cascade;
+drop table movie cascade;
+drop table movieUser cascade;
+drop table review cascade;
+drop table movie_ganre cascade;
+drop table country cascade;
+drop table movie_country cascade;
+*/
 
-COMMENT ON DATABASE movieland
-IS 'movieland database';
-
-create table IF NOT EXISTS GENRE  (
-  id SERIAL PRIMARY KEY NOT NULL,
-  genre CHAR (250) NOT NULL,
-  sys_upd TIMESTAMP default current_timestamp not null
+create table if not exists genre (
+id serial primary key,
+name varchar(100) not null UNIQUE
 );
 
 
-create table IF NOT EXISTS MOVIE  (
-  id SERIAL PRIMARY KEY NOT NULL,
-  name CHAR (250) NOT NULL,
-  release_year date,
-  country CHAR (250),
-  genre CHAR (250),
-  description varchar(10000),
-  rating real,
-  price real,
-  sys_upd TIMESTAMP default current_timestamp not null
+create table if not EXISTS movie  (
+id SERIAL primary key,
+name VARCHAR (100) not null UNIQUE,
+original_name varchar(100),
+release_year INTEGER not null,
+countries varchar(100), --Not on git
+description varchar(10000),
+rating real,
+price real,
+created_date timestamp default current_timestamp not null,
+last_update_date timestamp default current_timestamp not null,
+is_deleted BOOLEAN DEFAULT FALSE not null,
+to_be_deleted BOOLEAN DEFAULT FALSE not null
 );
 
 
-create table IF NOT EXISTS USERS  (
-  id SERIAL PRIMARY KEY NOT NULL,
-  name CHAR (250) NOT NULL,
-  mail CHAR (250) NOT NULL,
-  password CHAR (250) NOT NULL,
-  is_admin boolean default false not null,
-  sys_upd TIMESTAMP default current_timestamp not null
+create table if not exists movieUser (
+id serial primary key,
+name varchar(100) not null,
+email varchar(100) not null UNIQUE,
+pass varchar(100) not null,
+is_admin boolean default false not null,
+created_date timestamp default current_timestamp not null,
+last_update_date timestamp default current_timestamp not null,
+is_deleted BOOLEAN DEFAULT FALSE not null
 );
 
-create table IF NOT EXISTS REVIEW  (
-  id SERIAL PRIMARY KEY NOT NULL,
-  user_id integer references USERS(id),
-  movie_id integer references MOVIE(id),
-  description varchar(10000),
-  sys_upd TIMESTAMP default current_timestamp not null
+
+create table if not exists review (
+id serial primary key,
+movieuser_id integer references movieuser(id),
+movie_id integer references movie(id),
+description varchar(10000),
+created_date timestamp default current_timestamp not null,
+last_update_date timestamp default current_timestamp not null,
+is_deleted BOOLEAN DEFAULT FALSE not null
 );
---DROP table GENRE;
---DROP table MOVIE;
---DROP table REVIEW;
---DROP table USERS;
+
+
+create table if not exists movie_ganre (
+movie_id integer references movie(id),
+genre_id integer references genre(id),
+UNIQUE(movie_id, genre_id)
+);
+
+create table if not exists country (
+id serial primary key,
+name varchar(100) not null UNIQUE
+);
+
+create table if not exists movie_country (
+movie_id integer references movie(id),
+country_id integer references country(id),
+UNIQUE(movie_id, country_id)
+);
+

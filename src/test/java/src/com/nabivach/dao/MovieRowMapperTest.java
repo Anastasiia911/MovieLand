@@ -1,5 +1,6 @@
-package com.nabivach.dao;
-import com.nabivach.myentity.Movie;
+package src.com.nabivach.dao;
+import com.nabivach.dao.jdbc.mapper.MovieRowMapper;
+import com.nabivach.entity.Movie;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
