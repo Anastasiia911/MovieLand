@@ -5,7 +5,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config></context:annotation-config>
-    <context:component-scan base-package="com.nabivach"/>
+
+    <context:component-scan base-package="com.nabivach">
+    <context:exclude-filter type="regex" expression="com\.nabivach\.movieland\.controller\..*"/>
+    </context:component-scan>
 
     <!--DAO BEAN-->
 
@@ -25,7 +28,7 @@
     <!-- QUERY BEANS STRING CLASS-->
 
     <bean id="getAllMoviesSQL" class="java.lang.String">
-        <constructor-arg value="select name, release_year, RATING from movie"/>
+        <constructor-arg value="select id, name, original_name, release_year, RATING from movie"/>
     </bean>
 
     <bean id="getCountryForMovieSQL" class="java.lang.String">
