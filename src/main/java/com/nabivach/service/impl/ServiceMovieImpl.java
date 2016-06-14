@@ -21,8 +21,10 @@ public class ServiceMovieImpl implements ServiceMovie {
      private MovieDao movieDao;
 
         public List<Movie> getAllMovies(){
-
-        return  movieDao.getAllMovies();
+            List<Movie> movies = movieDao.getAllMovies();
+                               return movies;
     }
+
+
 
 }

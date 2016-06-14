@@ -10,6 +10,7 @@ public class Movie {
 
     private int id;
     private String name;
+    private String original_name;
     private int release_year;
     private List<Country> country;
     private List<Genre> genre;
@@ -39,6 +40,14 @@ public class Movie {
 
     public void setCountry(List<Country> country) {
         this.country = country;
+    }
+
+    public String getOriginal_name() {
+        return original_name;
+    }
+
+    public void setOriginal_name(String original_name) {
+        this.original_name = original_name;
     }
 
     public List<Genre> getGenre() {
@@ -83,8 +92,8 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "Movie { id ="+id+", name="+name+", release_year="+release_year+", country"+country+" , genre"
-                + genre+", description="+description +", rating="+rating+", price="+price+'\''+'}';
+        return "Movie { id =" + id + ", name=" + name + ", release_year=" + release_year + ", country" + country + " , genre"
+                + genre + ", description=" + description + ", rating=" + rating + ", price=" + price + '\'' + '}';
     }
 }
 
