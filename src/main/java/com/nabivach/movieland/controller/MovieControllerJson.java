@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,7 +28,6 @@ public class MovieControllerJson {
 
     @RequestMapping(name = "/v1/movies", method = RequestMethod.GET, produces = "application/json; UTF-8")
     @ResponseBody
-
     public String getMovieListInJSON() {
         LOGGER.debug("Starting getting All Movies in JSON..");
         long startTime = System.currentTimeMillis();
@@ -38,6 +38,15 @@ public class MovieControllerJson {
 
         return convertJson.movieToJsonConverter(movieList);
     }
+
+    @RequestMapping(name = "/v1/movies/{movieId}", produces = "UTF-8")
+    @ResponseBody
+    public String getMovieByIdInJSON() {
+        LOGGER.debug("Starting getting movies by id in JSON");
+
+        return null;
+    }
+
 
 }
 
