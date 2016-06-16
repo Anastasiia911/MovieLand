@@ -26,8 +26,8 @@ public class MovieRowMapperTest {
 
         //COMPARE
         assertEquals(movie.getName(), "Зеленая миля");
-        assertEquals(movie.getOriginal_name(), "The Green Mile");
-        assertEquals(movie.getRelease_year(), 1999);
+        assertEquals(movie.getOriginalName(), "The Green Mile");
+        assertEquals(movie.getReleaseYear(), 1999);
         assertEquals(movie.getRating(), 8.9, 0);
         //assertEquals(movie.getGenre(), Arrays.asList("Comedy","Action"));
         //assertEquals(movie.getCountry(), Arrays.asList("USA"));

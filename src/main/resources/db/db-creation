@@ -17,8 +17,8 @@ name varchar(100) not null UNIQUE
 create table if not EXISTS movie  (
 id SERIAL primary key,
 name VARCHAR (100) not null UNIQUE,
-original_name varchar(100),
-release_year INTEGER not null,
+originalName varchar(100),
+releaseYear INTEGER not null,
 countries varchar(100), --Not on git
 description varchar(10000),
 rating real,
@@ -45,7 +45,7 @@ is_deleted BOOLEAN DEFAULT FALSE not null
 create table if not exists review (
 id serial primary key,
 movieuser_id integer references movieuser(id),
-movie_id integer references movie(id),
+movieId integer references movie(id),
 description varchar(10000),
 created_date timestamp default current_timestamp not null,
 last_update_date timestamp default current_timestamp not null,
@@ -54,9 +54,9 @@ is_deleted BOOLEAN DEFAULT FALSE not null
 
 
 create table if not exists movie_ganre (
-movie_id integer references movie(id),
+movieId integer references movie(id),
 genre_id integer references genre(id),
-UNIQUE(movie_id, genre_id)
+UNIQUE(movieId, genre_id)
 );
 
 create table if not exists country (
@@ -65,8 +65,8 @@ name varchar(100) not null UNIQUE
 );
 
 create table if not exists movie_country (
-movie_id integer references movie(id),
+movieId integer references movie(id),
 country_id integer references country(id),
-UNIQUE(movie_id, country_id)
+UNIQUE(movieId, country_id)
 );
 

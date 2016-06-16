@@ -2,7 +2,7 @@ package com.nabivach.movieland.service.impl;
 
 import com.nabivach.movieland.dao.CountryDao;
 import com.nabivach.movieland.entity.Country;
-import com.nabivach.movieland.service.ServiceCountry;
+import com.nabivach.movieland.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Service
-public class ServiceCountryImpl implements ServiceCountry {
+public class CountryServiceImpl implements CountryService {
 
     @Autowired
     private CountryDao countryDao;

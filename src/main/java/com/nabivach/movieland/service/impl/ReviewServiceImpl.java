@@ -2,14 +2,14 @@ package com.nabivach.movieland.service.impl;
 
 import com.nabivach.movieland.dao.ReviewDao;
 import com.nabivach.movieland.entity.Review;
-import com.nabivach.movieland.service.ServiceReview;
+import com.nabivach.movieland.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ServiceReviewImpl implements ServiceReview {
+public class ReviewServiceImpl implements ReviewService {
 
     @Autowired
     private ReviewDao reviewDao;

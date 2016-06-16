@@ -8,11 +8,11 @@ import java.util.List;
 
 //SERVICE LAYER is there to provide logic to operate on the data sent to and from the DAO
 
-public interface ServiceMovie {
+public interface MovieService {
 
     List<MoviePreviewDto> getAllMovies();
 
-    List<MoviePreviewDto> enrichMoviePreviewDto();
+   // List<MoviePreviewDto> enrichMoviePreviewDto();
 
     MovieByIdDto getMovieById();
 }

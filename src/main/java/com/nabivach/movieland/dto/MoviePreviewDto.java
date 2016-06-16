@@ -1,6 +1,5 @@
 package com.nabivach.movieland.dto;
 
-import com.nabivach.movieland.entity.Country;
 import com.nabivach.movieland.entity.Genre;
 
 import java.util.List;
@@ -9,8 +8,8 @@ public class MoviePreviewDto {
 
 
     private String name;
-    private String original_name;
-    private int release_year;
+    private String originalName;
+    private int releaseYear;
     private double rating;
     private List<Genre> genre;
 
@@ -22,20 +21,20 @@ public class MoviePreviewDto {
         this.name = name;
     }
 
-    public String getOriginal_name() {
-        return original_name;
+    public String getOriginalName() {
+        return originalName;
     }
 
-    public void setOriginal_name(String original_name) {
-        this.original_name = original_name;
+    public void setOriginalName(String originalName) {
+        this.originalName = originalName;
     }
 
-    public int getRelease_year() {
-        return release_year;
+    public int getReleaseYear() {
+        return releaseYear;
     }
 
-    public void setRelease_year(int release_year) {
-        this.release_year = release_year;
+    public void setReleaseYear(int releaseYear) {
+        this.releaseYear = releaseYear;
     }
 
     public double getRating() {
@@ -57,7 +56,7 @@ public class MoviePreviewDto {
     // title (on both languages), year of release, rating, genre.
     @Override
     public String toString() {
-        return "Movie { name=" + name + ", release_year=" + release_year + " , rating"
+        return "Movie { name=" + name + ", releaseYear=" + releaseYear + " , rating"
                 + rating + " , genre"
                 + genre + '}';
     }

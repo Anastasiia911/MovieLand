@@ -19,32 +19,28 @@
         <property name="maxTotal" value="60"/>
     </bean>
 
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-
     <!-- QUERY BEANS STRING CLASS-->
 
     <bean id="getAllMoviesSQL" class="java.lang.String">
-        <constructor-arg value="select id, name, original_name, release_year, RATING from movie"/>
+        <constructor-arg value="select id, name, originalName, releaseYear, RATING from movie"/>
     </bean>
 
     <bean id="getCountryForMovieSQL" class="java.lang.String">
         <constructor-arg
-                value="select c.* from movie_country mc join country c on mc.country_id = c.id where mc.movie_id = ?"/>
+                value="select c.* from movie_country mc join country c on mc.country_id = c.id where mc.movieId = ?"/>
     </bean>
 
     <bean id="getGenresForMovieSQL" class="java.lang.String">
         <constructor-arg
-                value="select g.* from movie_ganre mg join genre g on mg.genre_id = g.id where mg.movie_id = ?"/>
+                value="select g.* from movie_ganre mg join genre g on mg.genre_id = g.id where mg.movieId = ?"/>
     </bean>
 
     <bean id="getReviewForMovieSQL" class="java.lang.String">
-        <constructor-arg value="select rv.* from review rv where rv.movie_id = ? limit ?"/>
+        <constructor-arg value="select rv.* from review rv where rv.movieId = ? limit ?"/>
     </bean>
 
     <bean id="getMovieByIdSQL" class="java.lang.String">
-        <constructor-arg value="select * from movie where movie_id = ?"/>
+        <constructor-arg value="select * from movie where movieId = ?"/>
     </bean>
 
     <!-- JSON CONVERTER-->
@@ -52,10 +48,12 @@
     <bean id="jsonConverter"
           class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="supportedMediaTypes" value="application/json"/>
-        <property name="prettyPrint" value="true"/>
     </bean>
 
-    <!-- REST template configuration -->
-    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
+    <!-- JDBC TEEMPLATE-->
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
 
 </beans>

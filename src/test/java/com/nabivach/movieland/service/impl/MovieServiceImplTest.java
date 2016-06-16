@@ -1,43 +1,40 @@
 package com.nabivach.movieland.service.impl;
 
 import com.nabivach.movieland.dao.MovieDao;
-import com.nabivach.movieland.dto.MovieByIdDto;
 import com.nabivach.movieland.dto.MoviePreviewDto;
 import com.nabivach.movieland.entity.Movie;
-import com.nabivach.movieland.service.ServiceCountry;
-import com.nabivach.movieland.service.ServiceGenre;
-import com.nabivach.movieland.service.ServiceReview;
+import com.nabivach.movieland.service.CountryService;
+import com.nabivach.movieland.service.GenreService;
+import com.nabivach.movieland.service.ReviewService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-
-import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ServiceMovieImplTest {
+public class MovieServiceImplTest {
 
     @Mock
     MovieDao movieDao;
 
     @Mock
-    ServiceGenre serviceGenre;
+    GenreService genreService;
 
     @Mock
-    ServiceCountry serviceCountry;
+    CountryService serviceCountry;
 
     @Mock
-    ServiceReview serviceReview;
+    ReviewService reviewService;
 
     @Before
     public void setUp() throws Exception {
 
        Movie testMovie = new Movie();
         testMovie.setName("test movie");
-        testMovie.setOriginal_name("original name");
-        testMovie.setRelease_year(2000);
+        testMovie.setOriginalName("original name");
+        testMovie.setReleaseYear(2000);
         testMovie.setRating(9.9);
         testMovie.setDescription("test description");
 
@@ -48,7 +45,7 @@ public class ServiceMovieImplTest {
         //Prepare
         Movie testMovie = new Movie();
         MoviePreviewDto moviePreviewDto = new MoviePreviewDto();
-        when(serviceGenre.getGenresForMovies(testMovie.getId())).thenReturn(null);
+        when(genreService.getGenresForMovie(testMovie.getId())).thenReturn(null);
 
         //Execute
         moviePreviewDto.setName(testMovie.getName());
