@@ -1,8 +1,9 @@
 package com.nabivach.movieland.controller;
 
+import com.nabivach.movieland.dto.MovieByIdDto;
+import com.nabivach.movieland.dto.MoviePreviewDto;
 import com.nabivach.movieland.entity.Movie;
 import com.nabivach.movieland.service.ServiceMovie;
-import com.nabivach.movieland.util.ConvertJson;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,28 +24,33 @@ public class MovieControllerJson {
     @Autowired
     private ServiceMovie serviceMovie;
 
-    @Autowired
-    private ConvertJson convertJson;
-
     @RequestMapping(name = "/v1/movies", method = RequestMethod.GET, produces = "application/json; UTF-8")
     @ResponseBody
-    public String getMovieListInJSON() {
+    public List<MoviePreviewDto> getMovieListInJSON() {
         LOGGER.debug("Starting getting All Movies in JSON..");
         long startTime = System.currentTimeMillis();
-        List<Movie> movieList = serviceMovie.getAllMovies();
+
+        List<MoviePreviewDto> movieList = serviceMovie.getAllMovies();
+
         long endTime = System.currentTimeMillis();
         long time = endTime - startTime;
-        LOGGER.debug("All Movies in JSON were received. It took {} ms " + time);
+        LOGGER.debug("All Movies in JSON were received. It took {} ms ", time);
 
-        return convertJson.movieToJsonConverter(movieList);
+        return movieList;
     }
 
-    @RequestMapping(name = "/v1/movies/{movieId}", produces = "UTF-8")
+    @RequestMapping(name = "/v1/movies/{movieId}", produces = "application/json; UTF-8")
     @ResponseBody
-    public String getMovieByIdInJSON() {
+    public MovieByIdDto getMovieByIdInJSON() {
         LOGGER.debug("Starting getting movies by id in JSON");
+        long startTime = System.currentTimeMillis();
 
-        return null;
+        MovieByIdDto movie = serviceMovie.getMovieById();
+
+        long endTime = System.currentTimeMillis();
+        long time = endTime - startTime;
+        LOGGER.debug("ALL Movies by id were received. {} ms ", time);
+        return movie;
     }
 
 

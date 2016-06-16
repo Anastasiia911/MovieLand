@@ -43,6 +43,10 @@
         <constructor-arg value="select rv.* from review rv where rv.movie_id = ? limit ?"/>
     </bean>
 
+    <bean id="getMovieByIdSQL" class="java.lang.String">
+        <constructor-arg value="select * from movie where movie_id = ?"/>
+    </bean>
+
           <!-- JSON CONVERTER-->
 
     <bean id="jsonConverter"
