@@ -1,4 +1,4 @@
-package com.nabivach.movieland.dao.impl;
+package com.nabivach.movieland.dao.jdbc;
 
 import com.nabivach.movieland.dao.MovieDao;
 import com.nabivach.movieland.dao.jdbc.mapper.MovieRowMapper;
@@ -45,10 +45,10 @@ public class MovieDaoImpl implements MovieDao {
     public Movie getMovieById() {
         LOGGER.debug("Starting execution SQL query...");
         long startTime = System.currentTimeMillis();
-        //Movie movie = jdbcTemplate.query(getMovieByIdSQL, movieRowMapper);
+        Movie movie = jdbcTemplate.queryForObject(getMovieByIdSQL, movieRowMapper);
         long time = System.currentTimeMillis() - startTime;
         LOGGER.info("Result AllMovies was received. It took {} ms", time);
-        return null;
+        return movie;
     }
 }
 

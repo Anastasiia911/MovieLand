@@ -1,4 +1,4 @@
-package com.nabivach.movieland.dao.impl;
+package com.nabivach.movieland.dao.jdbc;
 
 import com.nabivach.movieland.dao.ReviewDao;
 import com.nabivach.movieland.dao.jdbc.mapper.ReviewRowMapper;

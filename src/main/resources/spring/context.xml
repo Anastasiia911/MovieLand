@@ -4,10 +4,8 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:annotation-config></context:annotation-config>
-
     <context:component-scan base-package="com.nabivach">
-    <context:exclude-filter type="regex" expression="com\.nabivach\.movieland\.controller\..*"/>
+        <context:exclude-filter type="regex" expression="com\.nabivach\.movieland\.controller\..*"/>
     </context:component-scan>
 
     <!--DAO BEAN-->
@@ -32,11 +30,13 @@
     </bean>
 
     <bean id="getCountryForMovieSQL" class="java.lang.String">
-        <constructor-arg value="select c.* from movie_country mc join country c on mc.country_id = c.id where mc.movie_id = ?"/>
+        <constructor-arg
+                value="select c.* from movie_country mc join country c on mc.country_id = c.id where mc.movie_id = ?"/>
     </bean>
 
     <bean id="getGenresForMovieSQL" class="java.lang.String">
-        <constructor-arg value="select g.* from movie_ganre mg join genre g on mg.genre_id = g.id where mg.movie_id = ?"/>
+        <constructor-arg
+                value="select g.* from movie_ganre mg join genre g on mg.genre_id = g.id where mg.movie_id = ?"/>
     </bean>
 
     <bean id="getReviewForMovieSQL" class="java.lang.String">
@@ -47,12 +47,12 @@
         <constructor-arg value="select * from movie where movie_id = ?"/>
     </bean>
 
-          <!-- JSON CONVERTER-->
+    <!-- JSON CONVERTER-->
 
     <bean id="jsonConverter"
           class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="supportedMediaTypes" value="application/json"/>
-        <property name="prettyPrint" value="true" />
+        <property name="prettyPrint" value="true"/>
     </bean>
 
     <!-- REST template configuration -->

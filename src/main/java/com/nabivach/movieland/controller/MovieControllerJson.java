@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+@RequestMapping(name = "/v1")
 @Controller
 public class MovieControllerJson {
 
@@ -24,7 +25,7 @@ public class MovieControllerJson {
     @Autowired
     private ServiceMovie serviceMovie;
 
-    @RequestMapping(name = "/v1/movies", method = RequestMethod.GET, produces = "application/json; UTF-8")
+    @RequestMapping(name = "/movies", method = RequestMethod.GET, produces = "application/json; UTF-8")
     @ResponseBody
     public List<MoviePreviewDto> getMovieListInJSON() {
         LOGGER.debug("Starting getting All Movies in JSON..");
@@ -39,7 +40,7 @@ public class MovieControllerJson {
         return movieList;
     }
 
-    @RequestMapping(name = "/v1/movies/{movieId}", produces = "application/json; UTF-8")
+    @RequestMapping(name = "movie/{movieId}", produces = "application/json; UTF-8")
     @ResponseBody
     public MovieByIdDto getMovieByIdInJSON() {
         LOGGER.debug("Starting getting movies by id in JSON");
