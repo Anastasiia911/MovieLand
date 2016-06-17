@@ -29,30 +29,27 @@ public class TransformerEntityToDto {
     private ReviewService reviewService;
 
     List<MoviePreviewDto> moviePreviewDtoList = new ArrayList<MoviePreviewDto>();
-    List<Movie> movies = movieDao.getAllMovies(); //
-    List<Integer> moviesIdList = movieDao.getMoviesId();
 
-    public List<Integer> getIdAllMovies() {
+    List<Integer> allMoviesIdList = movieDao.getMoviesId();
+    List<Movie> movies = movieDao.getAllMovies();
+
+    public List<Integer> getGenresAllMovies() {
         for (Movie movie : movies) {
-            moviesIdList.add(movie.getId());
-        }
-        return moviesIdList;
+            allMoviesIdList.add(movie.getId());
+                    }
+
+        return allMoviesIdList;
     }
 
     public List<MoviePreviewDto> enrichMoviePreviewDto() {
         MoviePreviewDto moviePreviewDto = new MoviePreviewDto();
-        List<Movie> movies = movieDao.getAllMovies();
-        List<Integer> moviesIdList = new ArrayList<Integer>();
-
-        for (Movie movie : movies) {
-            moviesIdList.add(movie.getId());
-        }
 
         for (Movie movie : movies) {
 
             moviePreviewDto.setName(movie.getName());
             moviePreviewDto.setOriginalName(movie.getOriginalName());
             moviePreviewDto.setReleaseYear(movie.getReleaseYear());
+            // TO DO INSTEAD OF genreService.getGenresForMovie TAKE FROM HASH MAP
             moviePreviewDto.setGenre(genreService.getGenresForMovie(movie.getId()));
             moviePreviewDto.setRating(movie.getRating());
             moviePreviewDtoList.add(moviePreviewDto);

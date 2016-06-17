@@ -6,7 +6,6 @@ import java.util.List;
 
 public class MoviePreviewDto {
 
-
     private String name;
     private String originalName;
     private int releaseYear;
