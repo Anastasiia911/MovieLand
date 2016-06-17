@@ -2,7 +2,7 @@ package com.nabivach.movieland.dto;
 
 import java.util.List;
 
-public class MovieGenreDto {
+public class GenreDto {
 
     public int movieId;
     public List<String> genre;

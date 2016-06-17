@@ -4,6 +4,8 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:property-placeholder location="classpath*:movieland.properties"/>
+
     <context:component-scan base-package="com.nabivach">
         <context:exclude-filter type="regex" expression="com\.nabivach\.movieland\.controller\..*"/>
     </context:component-scan>
@@ -11,12 +13,12 @@
     <!--DAO BEAN-->
 
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://localhost:5432/movieland"/>
-        <property name="username" value="postgres"/>
-        <property name="password" value="root"/>
-        <property name="initialSize" value="20"/>
-        <property name="maxTotal" value="60"/>
+        <property name="driverClassName" value="${dataSource.driverClassName}"/>
+        <property name="url" value="${dataSource.url}"/>
+        <property name="username" value="${dataSource.username}"/>
+        <property name="password" value="${dataSource.password}"/>
+        <property name="initialSize" value="${dataSource.initialSize}"/>
+        <property name="maxTotal" value="${dataSource.maxTotal}"/>
     </bean>
 
     <!-- QUERY BEANS STRING CLASS-->
@@ -45,12 +47,6 @@
 
     <bean id="getGenresForAllMoviesSQL" class="java.lang.String">
         <constructor-arg value=""/>
-    </bean>
-    <!-- JSON CONVERTER-->
-
-    <bean id="jsonConverter"
-          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-        <property name="supportedMediaTypes" value="application/json"/>
     </bean>
 
     <!-- JDBC TEMPLATE-->

@@ -6,7 +6,7 @@ import com.nabivach.movieland.entity.Review;
 
 import java.util.List;
 
-public class MovieByIdDto {
+public class MovieDto {
 
     private String name;
     private String originalName;

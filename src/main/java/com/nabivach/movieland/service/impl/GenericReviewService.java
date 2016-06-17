@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ReviewServiceImpl implements ReviewService {
+public class GenericReviewService implements ReviewService {
 
     @Autowired
     private ReviewDao reviewDao;

@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Service
-public class CountryServiceImpl implements CountryService {
+public class GenericCountryService implements CountryService {
 
     @Autowired
     private CountryDao countryDao;
