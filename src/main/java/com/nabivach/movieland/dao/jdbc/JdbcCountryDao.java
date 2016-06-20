@@ -1,9 +1,9 @@
-package com.nabivach.movieland.dao.impl;
+package com.nabivach.movieland.dao.jdbc;
 
 import com.nabivach.movieland.dao.CountryDao;
 import com.nabivach.movieland.dao.jdbc.mapper.CountryRowMapper;
 import com.nabivach.movieland.entity.Country;
-import com.nabivach.movieland.service.ServiceMovie;
+import com.nabivach.movieland.service.MovieService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +17,8 @@ import java.util.List;
  */
 
 @Repository //Mark as SPRING bean
-public class CountryDaoImpl implements CountryDao {
-    private final static Logger LOGGER = LoggerFactory.getLogger(ServiceMovie.class);
+public class JdbcCountryDao implements CountryDao {
+    private final static Logger LOGGER = LoggerFactory.getLogger(MovieService.class);
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -38,7 +38,6 @@ public class CountryDaoImpl implements CountryDao {
 
         long time = System.currentTimeMillis() - startTime;
         LOGGER.info("Result getCountryForMovie was received. It took {} ms", time);
-        LOGGER.debug("Finish execution ...");
         return countryList;
     }
 }

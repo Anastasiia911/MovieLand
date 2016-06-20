@@ -7,7 +7,7 @@ import java.util.List;
 //SERVICE LAYER is there to provide logic to operate on the data sent to and from the DAO
 
 
-public interface ServiceCountry {
+public interface CountryService {
    List<Country> getCountryForMovies(int movieId);
 
 }

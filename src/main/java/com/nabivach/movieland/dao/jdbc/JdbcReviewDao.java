@@ -1,4 +1,4 @@
-package com.nabivach.movieland.dao.impl;
+package com.nabivach.movieland.dao.jdbc;
 
 import com.nabivach.movieland.dao.ReviewDao;
 import com.nabivach.movieland.dao.jdbc.mapper.ReviewRowMapper;
@@ -12,9 +12,9 @@ import java.util.List;
 
 @Repository //Mark as SPRING bean
 
-public class ReviewDaoImpl implements ReviewDao {
+public class JdbcReviewDao implements ReviewDao {
     // String sql = "SELECT m.name, m.release_year, m.rating, g.name  FROM MOVIE m join movie_ganre mg on m.id = mg.movie_id  join genre g on mg.genre_id = g.id;";
-    private final static Logger LOGGER = LoggerFactory.getLogger(ReviewDaoImpl.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(JdbcReviewDao.class);
 
     @Autowired
     private JdbcTemplate jdbcTemplate;

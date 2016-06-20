@@ -3,8 +3,8 @@ package com.nabivach.movieland.entity;
 public class Review {
 
     private int id;
-    private int user_id;
-    private int movie_id;
+    private int userId;
+    private int movieId;
     private String description;
 
     public int getId() {
@@ -15,20 +15,20 @@ public class Review {
         this.id = id;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public int getMovie_id() {
-        return movie_id;
+    public int getMovieId() {
+        return movieId;
     }
 
-    public void setMovie_id(int movie_id) {
-        this.movie_id = movie_id;
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
     }
 
     public String getDescription() {
@@ -41,7 +41,7 @@ public class Review {
 
     @Override
     public String toString() {
-        return "Review { id =" + id + ", user_id=" + user_id + ", movie_id=" + movie_id + ", description_id=" + '\'' + '}';
+        return "Review { id =" + id + ", userId=" + userId + ", movieId=" + movieId + ", description_id=" + '\'' + '}';
     }
 }
 
