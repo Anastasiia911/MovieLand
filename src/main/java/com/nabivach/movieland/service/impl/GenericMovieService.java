@@ -1,8 +1,6 @@
 package com.nabivach.movieland.service.impl;
 
 import com.nabivach.movieland.dao.MovieDao;
-import com.nabivach.movieland.dto.MovieDto;
-import com.nabivach.movieland.dto.MoviePreviewDto;
 import com.nabivach.movieland.entity.Movie;
 import com.nabivach.movieland.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +21,7 @@ public class GenericMovieService implements MovieService {
     public Movie getMovieById() {
         return movieDao.getMovieById();
     }
+
+
 }
+

@@ -6,14 +6,16 @@ import com.nabivach.movieland.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by anabivach on 17/06/2016.
- */
+
 @Component("moviePreviewDtoTransformer")
 public class MoviePreviewDtoTransformer implements Transformer<Movie, MoviePreviewDto> {
 
     @Autowired
     private GenreService genreService;
+
+    public void setGenreService(GenreService genreService) {
+        this.genreService = genreService;
+    }
 
     public MoviePreviewDto transformToDto(Movie movie) {
         MoviePreviewDto moviePreviewDto = new MoviePreviewDto();

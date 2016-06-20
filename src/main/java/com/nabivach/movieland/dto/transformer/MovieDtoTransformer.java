@@ -1,7 +1,6 @@
 package com.nabivach.movieland.dto.transformer;
 
 import com.nabivach.movieland.dto.MovieDto;
-import com.nabivach.movieland.dto.MoviePreviewDto;
 import com.nabivach.movieland.entity.Movie;
 import com.nabivach.movieland.service.CountryService;
 import com.nabivach.movieland.service.GenreService;
@@ -18,11 +17,24 @@ public class MovieDtoTransformer implements Transformer<Movie, MovieDto> {
     @Autowired
     private GenreService genreService;
 
+    public void setGenreService(GenreService genreService) {
+        this.genreService = genreService;
+    }
+
     @Autowired
     private CountryService countryService;
 
+    public void setCountryService(CountryService countryService){
+        this.countryService =countryService;
+    }
+
     @Autowired
     private ReviewService reviewService;
+
+    public void setReviewService(ReviewService reviewService){
+        this.reviewService =reviewService;
+    }
+
 
     public MovieDto transformToDto(Movie movie) {
         MovieDto movieDto = new MovieDto();
