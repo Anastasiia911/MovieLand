@@ -12,5 +12,5 @@ public interface MovieDao {
 
     Movie getMovieById();
 
-List<Integer> getMoviesId();
+    List<Integer> getMoviesIdList();
 }

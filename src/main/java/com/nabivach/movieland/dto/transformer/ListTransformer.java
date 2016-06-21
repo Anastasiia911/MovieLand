@@ -3,9 +3,6 @@ package com.nabivach.movieland.dto.transformer;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by anabivach on 17/06/2016.
- */
 public class ListTransformer<E, D> implements Transformer<List<E>, List<D>> {
 
     private final Transformer<E, D> transformer;
