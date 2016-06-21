@@ -46,7 +46,7 @@
     </bean>
 
     <bean id="getGenresForAllMoviesSQL" class="java.lang.String">
-        <constructor-arg value=""/>
+        <constructor-arg value="select g.* from genre g "/>
     </bean>
 
     <!-- JDBC TEMPLATE-->

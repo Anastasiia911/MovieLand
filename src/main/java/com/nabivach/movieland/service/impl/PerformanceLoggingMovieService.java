@@ -11,9 +11,7 @@ import org.springframework.util.StopWatch;
 
 import java.util.List;
 
-/**
- * Created by anabivach on 17/06/2016.
- */
+
 @Service("performanceLoggingMovieService")
 public class PerformanceLoggingMovieService implements MovieService {
 
