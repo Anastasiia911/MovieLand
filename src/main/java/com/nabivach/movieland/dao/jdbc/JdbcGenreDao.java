@@ -1,18 +1,16 @@
 package com.nabivach.movieland.dao.jdbc;
 
 import com.nabivach.movieland.dao.GenreDao;
-import com.nabivach.movieland.entity.Genre;
 import com.nabivach.movieland.dao.jdbc.mapper.GenreRowMapper;
+import com.nabivach.movieland.entity.Genre;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 @Repository //Mark as SPRING bean
 
@@ -31,11 +29,8 @@ public class JdbcGenreDao implements GenreDao {
 
     @Autowired
     private String getGenresForAllMoviesSQL;
-
     private GenreRowMapper genreRowMapper = new GenreRowMapper();
-
     public List<Genre> getGenreForMovie(int movieId) {
-
         LOGGER.debug("Starting execution SQL query...");
         long startTime = System.currentTimeMillis();
 
@@ -43,29 +38,22 @@ public class JdbcGenreDao implements GenreDao {
 
         long time = System.currentTimeMillis() - startTime;
         LOGGER.info("Result getGenres was received. It took {} ms", time);
-
-
         return genreList;
     }
 
-    public Map<Integer, List<Genre>> getGenreForAllMovies() {
+    @Override
+    public List<Genre> getGenresForAllMovies() {
         LOGGER.debug("Starting execution SQL query...");
         long startTime = System.currentTimeMillis();
-        MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource();
-        sqlParameterSource.addValue("movie_id",1);
 
-        namedJdbcTemplate.query(getGenresForAllMoviesSQL, sqlParameterSource,genreRowMapper);
-
-        //FillMap
-
+        List<Genre> genreList = jdbcTemplate.query(getGenresForAllMoviesSQL, genreRowMapper);
 
         long time = System.currentTimeMillis() - startTime;
         LOGGER.info("Result getGenres was received. It took {} ms", time);
 
 
-        return null;
+        return genreList;
     }
-
 }
 
 

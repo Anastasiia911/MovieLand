@@ -2,8 +2,11 @@ package com.nabivach.movieland.entity;
 
 public class Genre {
 
+    //  Spring scheduled;
+
     private int id;
     private String name;
+    //private localDatetime lastRefreshDate;
 
     public int getId() {
         return id;

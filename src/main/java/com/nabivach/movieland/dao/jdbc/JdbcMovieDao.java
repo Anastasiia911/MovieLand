@@ -3,14 +3,14 @@ package com.nabivach.movieland.dao.jdbc;
 import com.nabivach.movieland.dao.MovieDao;
 import com.nabivach.movieland.dao.jdbc.mapper.MovieRowMapper;
 import com.nabivach.movieland.entity.Movie;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Repository //Mark as SPRING bean
 
@@ -51,9 +51,15 @@ public class JdbcMovieDao implements MovieDao {
         return movie;
     }
 
-    public List<Integer> getMoviesId() {
-
-        return null;
+    public List<Integer> getMoviesIdList() {
+        int i;
+        List<Integer> movieIdList= new ArrayList<>();
+        for (i=0; i<getAllMovies().size(); i++)
+        {
+        Movie movie = getAllMovies().get(i);
+            movieIdList.add(movie.getId());
+        }
+        return movieIdList;
     }
 }
 
