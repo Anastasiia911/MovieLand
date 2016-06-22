@@ -3,6 +3,7 @@ package com.nabivach.movieland.dao.jdbc;
 import com.nabivach.movieland.dao.MovieDao;
 import com.nabivach.movieland.dao.jdbc.mapper.MovieRowMapper;
 import com.nabivach.movieland.entity.Movie;
+import com.nabivach.movieland.util.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +30,11 @@ public class JdbcMovieDao implements MovieDao {
 
     private MovieRowMapper movieRowMapper = new MovieRowMapper();
 
-    public List<Movie> getAllMovies() {
+    public List<Movie> getAllMovies(Order rating, Order price) {
         LOGGER.debug("Starting execution SQL query...");
         long startTime = System.currentTimeMillis();
 
-        List<Movie> allMovies = jdbcTemplate.query(getAllMoviesSQL, movieRowMapper);
+        List<Movie> allMovies = jdbcTemplate.query(getAllMoviesSQL + " order by rating " + rating.getSql() + ", price " + price.getSql(), movieRowMapper);
 
         long time = System.currentTimeMillis() - startTime;
         LOGGER.info("Result AllMovies was received. It took {} ms", time);
@@ -52,11 +53,8 @@ public class JdbcMovieDao implements MovieDao {
     }
 
     public List<Integer> getMoviesIdList() {
-        int i;
-        List<Integer> movieIdList= new ArrayList<>();
-        for (i=0; i<getAllMovies().size(); i++)
-        {
-        Movie movie = getAllMovies().get(i);
+        List<Integer> movieIdList = new ArrayList<>();
+        for (Movie movie : getAllMovies(Order.ASCENDING, Order.ASCENDING)) {
             movieIdList.add(movie.getId());
         }
         return movieIdList;

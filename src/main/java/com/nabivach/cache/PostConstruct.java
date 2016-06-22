@@ -1,5 +1,5 @@
 package com.nabivach.cache;
 
 
-public @interface PostConstruct {
+public @interface PostConstruct { //lifecycle mechanism
 }

@@ -24,7 +24,7 @@
     <!-- QUERY BEANS STRING CLASS-->
 
     <bean id="getAllMoviesSQL" class="java.lang.String">
-        <constructor-arg value="select id, name, originalName, releaseYear, RATING from movie"/>
+        <constructor-arg value="select id, name, originalName, releaseYear, rating from movie"/>
     </bean>
 
     <bean id="getCountryForMovieSQL" class="java.lang.String">

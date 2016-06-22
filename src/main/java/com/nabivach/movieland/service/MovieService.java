@@ -1,6 +1,7 @@
 package com.nabivach.movieland.service;
 
 import com.nabivach.movieland.entity.Movie;
+import com.nabivach.movieland.util.Order;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 public interface MovieService {
 
-    List<Movie> getAllMovies();
+    List<Movie> getAllMovies(Order rating, Order price);
 
     Movie getMovieById();
 }
