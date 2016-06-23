@@ -2,8 +2,9 @@ package com.nabivach.movieland.dao.jdbc;
 
 import com.nabivach.movieland.dao.MovieDao;
 import com.nabivach.movieland.dao.jdbc.mapper.MovieRowMapper;
+import com.nabivach.movieland.dto.MovieRequest;
 import com.nabivach.movieland.entity.Movie;
-import com.nabivach.movieland.util.Order;
+import com.nabivach.movieland.util.QueryGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,25 +17,25 @@ import java.util.List;
 @Repository //Mark as SPRING bean
 
 public class JdbcMovieDao implements MovieDao {
-    // String sql = "SELECT m.name, m.release_year, m.rating, g.name  FROM MOVIE m join movie_ganre mg on m.id = mg.movie_id  join genre g on mg.genre_id = g.id;";
+
     private final static Logger LOGGER = LoggerFactory.getLogger(JdbcMovieDao.class);
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private String getAllMoviesSQL;
+    private QueryGenerator getGeneratedQuery;
 
     @Autowired
     private String getMovieByIdSQL;
 
     private MovieRowMapper movieRowMapper = new MovieRowMapper();
 
-    public List<Movie> getAllMovies(Order rating, Order price) {
+    public List<Movie> getAllMovies(MovieRequest movieRequest) {
         LOGGER.debug("Starting execution SQL query...");
         long startTime = System.currentTimeMillis();
 
-        List<Movie> allMovies = jdbcTemplate.query(getAllMoviesSQL + " order by rating " + rating.getSql() + ", price " + price.getSql(), movieRowMapper);
+        List<Movie> allMovies = jdbcTemplate.query(getGeneratedQuery.getGeneratedQueryAllMovies(movieRequest), movieRowMapper);
 
         long time = System.currentTimeMillis() - startTime;
         LOGGER.info("Result AllMovies was received. It took {} ms", time);
@@ -43,18 +44,20 @@ public class JdbcMovieDao implements MovieDao {
         return allMovies;
     }
 
-    public Movie getMovieById() {
+    public Movie getMovieById(int movieId) {
         LOGGER.debug("Starting execution SQL query...");
         long startTime = System.currentTimeMillis();
-        Movie movie = jdbcTemplate.queryForObject(getMovieByIdSQL, movieRowMapper);
+        Movie movie = jdbcTemplate.queryForObject(getMovieByIdSQL,new Object[]{movieId}, movieRowMapper);
         long time = System.currentTimeMillis() - startTime;
         LOGGER.info("Result AllMovies was received. It took {} ms", time);
         return movie;
     }
 
+    //For Caching
     public List<Integer> getMoviesIdList() {
         List<Integer> movieIdList = new ArrayList<>();
-        for (Movie movie : getAllMovies(Order.ASCENDING, Order.ASCENDING)) {
+        MovieRequest movieRequest = new MovieRequest();
+        for (Movie movie : getAllMovies(movieRequest)) {
             movieIdList.add(movie.getId());
         }
         return movieIdList;

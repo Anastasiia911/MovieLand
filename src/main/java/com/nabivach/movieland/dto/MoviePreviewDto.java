@@ -52,7 +52,6 @@ public class MoviePreviewDto {
         this.genre = genre;
     }
 
-    // title (on both languages), year of release, rating, genre.
     @Override
     public String toString() {
         return "Movie { name=" + name + ", releaseYear=" + releaseYear + " , rating"

@@ -1,24 +1,21 @@
 package com.nabivach.movieland.util;
 
-/**
- * Created by anabivach on 22/06/2016.
- */
 public enum Order {
 
     ASCENDING("asc"), DESCENDING("desc");
 
-    private final String sql;
+    private final String orderForQuery;
 
-    private Order(String sql) {
-        this.sql = sql;
+   Order(String orderForQuery) {
+        this.orderForQuery = orderForQuery;
     }
 
-    public String getSql() {
-        return sql;
+    public String getOrderForQuery() {
+        return orderForQuery;
     }
 
-    public static Order parseString(String param) {
-        if (Order.DESCENDING.getSql().equalsIgnoreCase(param)) {
+    public static Order getOrderForParams(String param) {
+        if (Order.DESCENDING.getOrderForQuery().equalsIgnoreCase(param)) {
             return Order.DESCENDING;
         } else {
             return Order.ASCENDING;
