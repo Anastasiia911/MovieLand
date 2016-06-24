@@ -1,10 +1,14 @@
 package com.nabivach.movieland.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Genre {
 
     //  Spring scheduled;
 
+    @JsonIgnore
     private int id;
+
     private String name;
     //private localDatetime lastRefreshDate;
 
