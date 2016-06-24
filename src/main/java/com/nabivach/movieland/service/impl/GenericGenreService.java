@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service("genericGenreService")
 public class GenericGenreService implements GenreService {
@@ -19,12 +20,6 @@ public class GenericGenreService implements GenreService {
         return genreDao.getGenreForMovie(movieId);
     }
 
-    public List<Genre> getGenresForAllMovies() {
-
-        return genreDao.getGenresForAllMovies();
-    }
-
-
-}
+  }
 
 

@@ -53,15 +53,6 @@ public class JdbcMovieDao implements MovieDao {
         return movie;
     }
 
-    //For Caching
-    public List<Integer> getMoviesIdList() {
-        List<Integer> movieIdList = new ArrayList<>();
-        MovieRequest movieRequest = new MovieRequest();
-        for (Movie movie : getAllMovies(movieRequest)) {
-            movieIdList.add(movie.getId());
-        }
-        return movieIdList;
-    }
 }
 
 

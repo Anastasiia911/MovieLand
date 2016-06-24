@@ -40,7 +40,7 @@ public class MovieController {
 
     @RequestMapping(name = "/movies", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<MoviePreviewDto> getMovieListJson(@RequestParam("rating") String rating, @RequestParam("price") String price) {
+    public List<MoviePreviewDto> getMovieListJson(@RequestParam(required = false) String rating, @RequestParam(required = false) String price) {
         LOGGER.debug("Starting getting all movies in JSON");
         MovieRequest movieRequest = movieRequestTransformer.getMovieRequest(rating,price);
         List<Movie> movies = performanceLoggingMovieService.getAllMovies(movieRequest);

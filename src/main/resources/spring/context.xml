@@ -24,29 +24,29 @@
     <!-- QUERY BEANS STRING CLASS-->
 
     <bean id="getAllMoviesSQL" class="java.lang.String">
-        <constructor-arg value="select id, name, originalName, releaseYear, rating from movie"/>
+        <constructor-arg value="select id, name, original_name, release_year, rating from movie"/>
     </bean>
 
     <bean id="getCountryForMovieSQL" class="java.lang.String">
         <constructor-arg
-                value="select c.* from movie_country mc join country c on mc.country_id = c.id where mc.movieId = ?"/>
+                value="select c.* from movie_country mc join country c on mc.country_id = c.id where mc.movie_id = ?"/>
     </bean>
 
     <bean id="getGenresForMovieSQL" class="java.lang.String">
         <constructor-arg
-                value="select g.* from movie_ganre mg join genre g on mg.genre_id = g.id where mg.movieId = ?"/>
+                value="select g.* from movie_ganre mg join genre g on mg.genre_id = g.id where mg.movie_id = ?"/>
     </bean>
 
     <bean id="getReviewForMovieSQL" class="java.lang.String">
-        <constructor-arg value="select rv.* from review rv where rv.movieId = ? limit ?"/>
+        <constructor-arg value="select rv.* from review rv where rv.movie_id = ? limit ?"/>
     </bean>
 
     <bean id="getMovieByIdSQL" class="java.lang.String">
-        <constructor-arg value="select * from movie where movieId = ?"/>
+        <constructor-arg value="select * from movie where movie_id = ?"/>
     </bean>
 
     <bean id="getGenresForAllMoviesSQL" class="java.lang.String">
-        <constructor-arg value="select g.* from genre g "/>
+        <constructor-arg value="select g.name,mg.movie_id  from movie_ganre mg join genre g on mg.genre_id = g.id"/>
     </bean>
 
     <!-- JDBC TEMPLATE-->
