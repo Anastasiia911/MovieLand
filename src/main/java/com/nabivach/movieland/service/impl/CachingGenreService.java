@@ -3,7 +3,9 @@ package com.nabivach.movieland.service.impl;
 import com.nabivach.movieland.dao.GenreDao;
 import com.nabivach.movieland.entity.Genre;
 import com.nabivach.movieland.service.GenreService;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -14,12 +16,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 @Service
-public class CachingGenreService implements GenreService {
+public class CachingGenreService implements GenreService,InitializingBean {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CachingGenreService.class);
+
     @Autowired
     private GenreDao genreDao;
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(CachingGenreService.class);
-    Map<Integer, List<Genre>> cacheGenresForAllMoviesMap = new ConcurrentHashMap<>();
 
+    private Map<Integer, List<Genre>> cacheGenresForAllMoviesMap = new ConcurrentHashMap<>();
 
     @Override
     public List<Genre> getGenresForMovie(int movieId) {
@@ -40,6 +44,11 @@ public class CachingGenreService implements GenreService {
         cacheGenresForAllMoviesMap.clear();
         cacheGenresForAllMoviesMap = getGenresForAllMovies();
         return cacheGenresForAllMoviesMap;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+
     }
 }
 

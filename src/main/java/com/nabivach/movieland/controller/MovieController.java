@@ -3,13 +3,13 @@ package com.nabivach.movieland.controller;
 import com.nabivach.movieland.dto.MovieDto;
 import com.nabivach.movieland.dto.MoviePreviewDto;
 import com.nabivach.movieland.dto.MovieRequest;
+import com.nabivach.movieland.dto.MovieSearchRequest;
 import com.nabivach.movieland.dto.transformer.ListTransformer;
 import com.nabivach.movieland.dto.transformer.MovieDtoTransformer;
 import com.nabivach.movieland.dto.transformer.MoviePreviewDtoTransformer;
 import com.nabivach.movieland.dto.transformer.MovieRequestTransformer;
 import com.nabivach.movieland.entity.Movie;
 import com.nabivach.movieland.service.impl.PerformanceLoggingMovieService;
-import com.nabivach.movieland.util.Order;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,7 @@ public class MovieController {
     @ResponseBody
     public List<MoviePreviewDto> getMovieListJson(@RequestParam(required = false) String rating, @RequestParam(required = false) String price) {
         LOGGER.debug("Starting getting all movies in JSON");
-        MovieRequest movieRequest = movieRequestTransformer.getMovieRequest(rating,price);
+        MovieRequest movieRequest = movieRequestTransformer.getMovieRequest(rating, price);
         List<Movie> movies = performanceLoggingMovieService.getAllMovies(movieRequest);
 
         ListTransformer<Movie, MoviePreviewDto> moviePreviewDtoListTransformer = new ListTransformer<>(moviePreviewDtoTransformer);
@@ -61,6 +61,19 @@ public class MovieController {
 
         return movieDto;
     }
+
+    @RequestMapping(name = "search", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<MoviePreviewDto> getMoviesSearchJson(@RequestBody(required = false)String json) {
+        LOGGER.debug("Received request for search from user..");
+        MovieSearchRequest movieSearchRequest;
+
+        LOGGER.debug("Starting getting movies: user serch .. ");
+
+        return null;
+    }
+
+
 }
 
 
