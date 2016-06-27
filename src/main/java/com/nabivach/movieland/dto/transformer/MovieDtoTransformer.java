@@ -5,19 +5,17 @@ import com.nabivach.movieland.entity.Movie;
 import com.nabivach.movieland.service.CountryService;
 import com.nabivach.movieland.service.GenreService;
 import com.nabivach.movieland.service.ReviewService;
+import com.nabivach.movieland.service.impl.CachingGenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by anabivach on 17/06/2016.
- */
 @Component("movieDtoTransformer")
 public class MovieDtoTransformer implements Transformer<Movie, MovieDto> {
 
     @Qualifier("cachingGenreService")
     @Autowired
-    private GenreService cachingGenreService;
+    private CachingGenreService cachingGenreService;
 
     @Qualifier("genericGenreService")
     @Autowired
@@ -49,7 +47,7 @@ public class MovieDtoTransformer implements Transformer<Movie, MovieDto> {
         movieDto.setReleaseYear(movie.getReleaseYear());
         movieDto.setCountry(countryService.getCountryForMovies(movie.getId()));
         //movieDto.setGenre(genreService.getGenresForMovie(movie.getId()));
-        movieDto.setGenre(cachingGenreService.getGenresForMovie(movie.getId()));
+        movieDto.setGenre(cachingGenreService.getGenresForAllMovies().get(movie.getId()));
         movieDto.setDescription(movie.getDescription());
         movieDto.setRating(movie.getRating());
         movieDto.setPrice(movie.getPrice());

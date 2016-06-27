@@ -2,7 +2,7 @@ package com.nabivach.movieland.util;
 
 public enum Order {
 
-    ASCENDING("asc"), DESCENDING("desc");
+    ASC("asc"), DESC("desc");
 
     private final String orderForQuery;
 
@@ -15,10 +15,10 @@ public enum Order {
     }
 
     public static Order getOrderForParams(String param) {
-        if (Order.DESCENDING.getOrderForQuery().equalsIgnoreCase(param)) {
-            return Order.DESCENDING;
+        if (Order.DESC.getOrderForQuery().equalsIgnoreCase(param)) {
+            return Order.DESC;
         } else {
-            return Order.ASCENDING;
+            return Order.ASC;
         }
     }
 }
