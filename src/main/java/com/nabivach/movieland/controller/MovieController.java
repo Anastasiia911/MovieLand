@@ -10,14 +10,15 @@ import com.nabivach.movieland.dto.transformer.MoviePreviewDtoTransformer;
 import com.nabivach.movieland.dto.transformer.MovieRequestTransformer;
 import com.nabivach.movieland.entity.Movie;
 import com.nabivach.movieland.service.impl.PerformanceLoggingMovieService;
-import org.slf4j.LoggerFactory;
+import com.nabivach.movieland.util.deserializer.JsonReader;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-
+import java.io.IOException;
 import java.util.List;
 
 @RequestMapping(name = "/v1")
@@ -37,6 +38,9 @@ public class MovieController {
 
     @Autowired
     private MovieRequestTransformer movieRequestTransformer;
+
+    @Autowired
+    private JsonReader jsonReader;
 
     @RequestMapping(name = "/movies", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -64,9 +68,10 @@ public class MovieController {
 
     @RequestMapping(name = "search", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<MoviePreviewDto> getMoviesSearchJson(@RequestBody(required = false)String json) {
+    public List<MoviePreviewDto> getMoviesSearchJson(@RequestBody(required = false)String json) throws IOException {
         LOGGER.debug("Received request for search from user..");
-        MovieSearchRequest movieSearchRequest;
+        MovieSearchRequest movieSearchRequest = jsonReader.parseJson(json, MovieSearchRequest.class);
+        //getGeneretaedQueryUserRequest
 
         LOGGER.debug("Starting getting movies: user serch .. ");
 
