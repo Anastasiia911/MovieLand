@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Repository //Mark as SPRING bean
 
@@ -31,16 +31,12 @@ public class JdbcGenreDao implements GenreDao {
     @Autowired
     private JdbcMovieDao jdbcMovieDao;
 
-    @Autowired
-    private String getGenresForAllMoviesSQL;
     private GenreRowMapper genreRowMapper = new GenreRowMapper();
 
     public List<Genre> getGenreForMovie(int movieId) {
         LOGGER.debug("Starting execution SQL query...");
         long startTime = System.currentTimeMillis();
-
         List<Genre> genreList = jdbcTemplate.query(getGenresForMovieSQL, new Object[]{movieId}, genreRowMapper);
-
         long time = System.currentTimeMillis() - startTime;
         LOGGER.info("Result getGenres was received. It took {} ms", time);
         return genreList;
@@ -55,7 +51,7 @@ public class JdbcGenreDao implements GenreDao {
         LOGGER.debug("Starting execution SQL query for getting AllMovies ...");
         List<Movie> allMovies = jdbcMovieDao.getAllMovies(movieRequest);
         LOGGER.debug("Getting AllMovies finished successfully..");
-        Map<Integer, List<Genre>> genresForAllMoviesMap = new ConcurrentHashMap<>();
+        Map<Integer, List<Genre>> genresForAllMoviesMap = new HashMap<>();
         for (int i = 0; i < allMovies.size(); i++) {
             Movie movie = allMovies.get(i);
             genresForAllMoviesMap.put(movie.getId(), getGenreForMovie(movie.getId()));

@@ -34,13 +34,10 @@ public class JdbcMovieDao implements MovieDao {
     public List<Movie> getAllMovies(MovieRequest movieRequest) {
         LOGGER.debug("Starting execution SQL query...");
         long startTime = System.currentTimeMillis();
-
         List<Movie> allMovies = jdbcTemplate.query(getGeneratedQuery.getGeneratedQueryAllMovies(movieRequest), movieRowMapper);
-
         long time = System.currentTimeMillis() - startTime;
         LOGGER.info("Result AllMovies was received. It took {} ms", time);
         LOGGER.debug("Finish execution ...");
-
         return allMovies;
     }
 
