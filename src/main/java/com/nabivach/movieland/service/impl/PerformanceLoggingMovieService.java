@@ -1,6 +1,7 @@
 package com.nabivach.movieland.service.impl;
 
 import com.nabivach.movieland.dto.MovieRequest;
+import com.nabivach.movieland.dto.MovieSearchRequest;
 import com.nabivach.movieland.entity.Movie;
 import com.nabivach.movieland.service.MovieService;
 import com.nabivach.movieland.util.Order;
@@ -42,4 +43,11 @@ public class PerformanceLoggingMovieService implements MovieService {
         LOGGER.debug("All Movies in JSON were received. It took {} ms ", stopWatch.getTotalTimeMillis());
         return movie;
     }
+
+    @Override
+    public List<Movie> getMoviesSearch(MovieSearchRequest movieSearchRequest) {
+        return null;
+    }
+
+
 }

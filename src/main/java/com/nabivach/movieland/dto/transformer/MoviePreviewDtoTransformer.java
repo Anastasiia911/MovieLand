@@ -7,9 +7,10 @@ import com.nabivach.movieland.service.impl.CachingGenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 
-@Component("moviePreviewDtoTransformer")
+@Service("moviePreviewDtoTransformer")
 public class MoviePreviewDtoTransformer implements Transformer<Movie, MoviePreviewDto> {
 
     @Qualifier("genericGenreService")
@@ -28,7 +29,6 @@ public class MoviePreviewDtoTransformer implements Transformer<Movie, MoviePrevi
         moviePreviewDto.setName(movie.getName());
         moviePreviewDto.setOriginalName(movie.getOriginalName());
         moviePreviewDto.setReleaseYear(movie.getReleaseYear());
-        // moviePreviewDto.setGenre(genreService.getGenresForMovie(movie.getId()));
         moviePreviewDto.setGenre(cachingGenreService.getGenresForMovie(movie.getId()));
         moviePreviewDto.setRating(movie.getRating());
         return moviePreviewDto;

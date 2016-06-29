@@ -1,6 +1,7 @@
 package com.nabivach.movieland.dao;
 
 import com.nabivach.movieland.dto.MovieRequest;
+import com.nabivach.movieland.dto.MovieSearchRequest;
 import com.nabivach.movieland.entity.Movie;
 import com.nabivach.movieland.util.Order;
 
@@ -11,7 +12,7 @@ import java.util.List;
 
 public interface MovieDao {
     List<Movie> getAllMovies(MovieRequest movieRequest);
-
     Movie getMovieById(int movieId);
+    List<Movie> getMoviesSearch(MovieSearchRequest movieSearchRequest);
 
 }

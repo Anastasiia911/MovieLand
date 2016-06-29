@@ -8,9 +8,9 @@ import com.nabivach.movieland.service.ReviewService;
 import com.nabivach.movieland.service.impl.CachingGenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component("movieDtoTransformer")
+@Service("movieDtoTransformer")
 public class MovieDtoTransformer implements Transformer<Movie, MovieDto> {
 
     @Qualifier("cachingGenreService")
