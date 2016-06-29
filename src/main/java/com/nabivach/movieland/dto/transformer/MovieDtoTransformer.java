@@ -3,6 +3,7 @@ package com.nabivach.movieland.dto.transformer;
 import com.nabivach.movieland.dto.MovieDto;
 import com.nabivach.movieland.entity.Movie;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 
 @Service("movieDtoTransformer")
