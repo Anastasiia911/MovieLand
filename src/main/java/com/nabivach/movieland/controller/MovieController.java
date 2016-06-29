@@ -4,7 +4,10 @@ import com.nabivach.movieland.dto.MovieDto;
 import com.nabivach.movieland.dto.MoviePreviewDto;
 import com.nabivach.movieland.dto.MovieRequest;
 import com.nabivach.movieland.dto.MovieSearchRequest;
-import com.nabivach.movieland.dto.transformer.*;
+import com.nabivach.movieland.dto.transformer.ListTransformer;
+import com.nabivach.movieland.dto.transformer.MovieDtoTransformer;
+import com.nabivach.movieland.dto.transformer.MoviePreviewDtoTransformer;
+import com.nabivach.movieland.dto.transformer.MovieRequestTransformer;
 import com.nabivach.movieland.entity.Movie;
 import com.nabivach.movieland.service.impl.PerformanceLoggingMovieService;
 import com.nabivach.movieland.util.deserializer.JsonReader;
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.io.IOException;
 import java.util.List;
@@ -44,7 +48,7 @@ public class MovieController {
     @ResponseBody
     public List<MoviePreviewDto> getMovieListJson(@RequestParam(required = false) String rating, @RequestParam(required = false) String price) {
         LOGGER.debug("Starting getting all movies in JSON");
-        MovieRequest movieRequest = movieRequestTransformer.getMovieRequest(rating, price);
+        MovieRequest movieRequest = movieRequestTransformer.getMovieRequest(rating,price);
         List<Movie> movies = performanceLoggingMovieService.getAllMovies(movieRequest);
 
         ListTransformer<Movie, MoviePreviewDto> moviePreviewDtoListTransformer = new ListTransformer<>(moviePreviewDtoTransformer);

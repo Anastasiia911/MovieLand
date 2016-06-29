@@ -39,7 +39,6 @@ public class JdbcMovieDao implements MovieDao {
         long time = System.currentTimeMillis() - startTime;
         LOGGER.info("Result AllMovies was received. It took {} ms", time);
         LOGGER.debug("Finish execution ...");
-
         return allMovies;
     }
 

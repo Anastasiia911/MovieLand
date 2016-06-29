@@ -3,6 +3,7 @@ package com.nabivach.movieland.service.impl;
 import com.nabivach.movieland.dao.GenreDao;
 import com.nabivach.movieland.entity.Genre;
 import com.nabivach.movieland.service.GenreService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -16,39 +17,26 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 @Service
-public class CachingGenreService implements GenreService,InitializingBean {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(CachingGenreService.class);
+public class CachingGenreService implements GenreService {
+   private static final Logger LOGGER = LoggerFactory.getLogger(CachingGenreService.class);
 
     @Autowired
     private GenreDao genreDao;
+    private Map<Integer, List<Genre>> movieIdGenresCache = new ConcurrentHashMap<>();
 
-    private Map<Integer, List<Genre>> cacheGenresForAllMoviesMap = new ConcurrentHashMap<>();
-
-    @Override
+        @Override
     public List<Genre> getGenresForMovie(int movieId) {
         LOGGER.debug("Start getting cache by movieId..");
-        return genreDao.getGenreForMovie(movieId);
-    }
-
-    public Map<Integer, List<Genre>> getGenresForAllMovies() {
-        LOGGER.debug("Start getting new cache ..");
-        cacheGenresForAllMoviesMap = genreDao.getGenresForAllMovies();
-        LOGGER.debug("Finish getting new cache ..");
-        return cacheGenresForAllMoviesMap;
+        return movieIdGenresCache.get(movieId);
     }
 
     @Scheduled(fixedRate = 4 * 60 * 60 * 1000)
-    public Map<Integer, List<Genre>> invalidateCache() {
+    private void invalidateCache() {
         LOGGER.debug("Start clearing cache older then 4 hours ..");
-        cacheGenresForAllMoviesMap.clear();
-        cacheGenresForAllMoviesMap = getGenresForAllMovies();
-        return cacheGenresForAllMoviesMap;
-    }
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-
+        movieIdGenresCache.clear();
+        LOGGER.debug("Start getting new cache ..");
+        movieIdGenresCache = genreDao.getGenresForAllMovies();
+        LOGGER.debug("Finish getting new cache ..");
     }
 }
 
