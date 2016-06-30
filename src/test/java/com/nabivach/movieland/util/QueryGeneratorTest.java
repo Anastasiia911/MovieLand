@@ -10,7 +10,7 @@ public class QueryGeneratorTest extends TestCase {
     private QueryGenerator queryGenerator = new QueryGenerator();
 
     public void testGetMoviesSearchRequestSQL() throws Exception {
-        queryGenerator.setGetMoviesSearchRequestPrefix("SELECT DISTINCT movie FROM movie\n" +
+        queryGenerator.setGetMoviesSearchRequestPrefix("SELECT DISTINCT movie.id, movie.name, movie.original_name, movie.release_year, movie.rating FROM movie\n" +
                 "    join movie_ganre on movie.id = movie_ganre.movie_id\n" +
                 "    join movie_country on movie.id = movie_country.movie_id\n" +
                 "    join genre on genre.id = movie_ganre.genre_id\n" +
@@ -21,7 +21,7 @@ public class QueryGeneratorTest extends TestCase {
         when(movieSearchRequest.getGenre()).thenReturn("дама");
         when(movieSearchRequest.getReleaseYear()).thenReturn(1900);
         when(movieSearchRequest.getTitle()).thenReturn("Green mile");
-        assertEquals(queryGenerator.getMoviesSearchRequestSQL(movieSearchRequest), "SELECT DISTINCT movie FROM movie\n" +
+        assertEquals(queryGenerator.getMoviesSearchRequestSQL(movieSearchRequest), "SELECT DISTINCT movie.id, movie.name, movie.original_name, movie.release_year, movie.rating FROM movie\n" +
                 "    join movie_ganre on movie.id = movie_ganre.movie_id\n" +
                 "    join movie_country on movie.id = movie_country.movie_id\n" +
                 "    join genre on genre.id = movie_ganre.genre_id\n" +

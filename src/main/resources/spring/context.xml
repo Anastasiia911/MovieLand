@@ -50,7 +50,7 @@
     </bean>
 
     <bean id="getMoviesSearchRequestPrefix" class="java.lang.String">
-        <constructor-arg value="SELECT DISTINCT movie FROM movie
+        <constructor-arg value="SELECT DISTINCT movie.id, movie.name, movie.original_name, movie.release_year, movie.rating FROM movie
     join movie_ganre on movie.id = movie_ganre.movie_id
     join movie_country on movie.id = movie_country.movie_id
     join genre on genre.id = movie_ganre.genre_id

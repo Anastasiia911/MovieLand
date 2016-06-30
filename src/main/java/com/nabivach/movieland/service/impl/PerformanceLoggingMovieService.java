@@ -46,7 +46,12 @@ public class PerformanceLoggingMovieService implements MovieService {
 
     @Override
     public List<Movie> getMoviesSearch(MovieSearchRequest movieSearchRequest) {
-        return null;
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        List<Movie> movieSearchList= movieService.getMoviesSearch(movieSearchRequest);
+        stopWatch.stop();
+        LOGGER.debug("All Movies for user search were received. It took {} ms ", stopWatch.getTotalTimeMillis());
+        return movieSearchList;
     }
 
 
