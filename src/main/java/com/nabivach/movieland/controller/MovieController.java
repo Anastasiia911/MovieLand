@@ -69,7 +69,7 @@ public class MovieController {
 
     @RequestMapping(name = "/movies/search", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<MoviePreviewDto> getMoviesSearchJson(@RequestBody(required = false) String json) throws IOException {
+    public List<MoviePreviewDto> getMoviesSearchJson(@RequestBody String json) throws IOException {
         LOGGER.debug("Received request for search from user..");
         MovieSearchRequest movieSearchRequest = jsonReader.parseJson(json, MovieSearchRequest.class);
         LOGGER.debug("Starting getting movies: user search .. ");
