@@ -1,18 +1,26 @@
 package com.nabivach.movieland.entity;
 
 
-public class User {
-    private String token;
+public class User { //id, name, email, pass
+    private int userId;
+    private String name;
     private String login;
-    private String password;
-    private String mail;
+    private String password; //encrypted
 
-    public String getToken() {
-        return token;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLogin() {
@@ -29,13 +37,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
     }
 }

@@ -1,6 +1,6 @@
 package com.nabivach.movieland.controller;
 
-import com.nabivach.movieland.dto.UserCredentials;
+import com.nabivach.movieland.dto.Credentials;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -15,9 +15,9 @@ public class SecurityController {
     @RequestMapping(value = "/login", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void authUser(@RequestParam String login, @RequestParam String password) {
         LOGGER.debug("Starting user authentification process..");
-       final UserCredentials userCredentials = new UserCredentials();
-       // userCredentials.setLogin(login);
-       // userCredentials.setPassword(password);
+       final Credentials userCredentials = new Credentials();
+       // UserCredentials.setMail(login);
+       // UserCredentials.setPassword(password);
 
 
         LOGGER.debug("Finishing user authentification process..");

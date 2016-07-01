@@ -1,11 +1,10 @@
 package com.nabivach.movieland.service.impl;
 
 
-import com.nabivach.movieland.dto.UserCredentials;
+import com.nabivach.movieland.dto.Credentials;
 import com.nabivach.movieland.service.UserService;
 
 public class AuthUserService implements UserService {
-
 
     @Override
     public String getUserByToken() {
@@ -13,7 +12,7 @@ public class AuthUserService implements UserService {
     }
 
     @Override
-    public boolean checkUserRegistredInDB(UserCredentials userCredentials) {
+    public boolean checkUserRegistredInDB(Credentials userCredentials) {
         return false;
     }
 }

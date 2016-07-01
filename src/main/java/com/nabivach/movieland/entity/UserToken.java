@@ -1,16 +1,16 @@
 package com.nabivach.movieland.entity;
 
-import com.nabivach.movieland.dto.UserCredentials;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class UserToken {
-    private int userId;
-    private LocalDateTime generationTime;
-    private int token;
 
-    public int getToken() {
+    private final User user;
+    private LocalDateTime generationTime;
+    private LocalDateTime expirationTime = generationTime.plusHours(2);
+    private String token;
+
+    public String getToken() {
         return token;
     }
 
@@ -18,10 +18,14 @@ public class UserToken {
         return generationTime;
     }
 
-   public UserToken (int userId) {
-       this.userId =userId;
+    public LocalDateTime getExpirationTime() {
+        return expirationTime;
+    }
+
+    public UserToken(User user) {
+        this.user = user;
         generationTime = LocalDateTime.now();
-        UUID token = UUID.randomUUID();
-           }
+        String token = UUID.randomUUID().toString();
+    }
 
 }
