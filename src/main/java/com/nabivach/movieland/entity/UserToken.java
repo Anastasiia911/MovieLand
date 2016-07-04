@@ -1,31 +1,35 @@
 package com.nabivach.movieland.entity;
 
+import com.nabivach.movieland.service.impl.CachedSecurityService;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class UserToken {
-
-    private final User user;
-    private LocalDateTime generationTime;
-    private LocalDateTime expirationTime = generationTime.plusHours(2);
+    private User user;
+    private LocalDateTime expirationTime;
     private String token;
+
+    @Autowired
+    CachedSecurityService cachedSecurityService;
+
+    public UserToken(User user) {
+        this.user = user;
+        expirationTime = LocalDateTime.now().plusHours(2);
+        token = UUID.randomUUID().toString();
+    }
 
     public String getToken() {
         return token;
-    }
-
-    public LocalDateTime getGenerationTime() {
-        return generationTime;
     }
 
     public LocalDateTime getExpirationTime() {
         return expirationTime;
     }
 
-    public UserToken(User user) {
-        this.user = user;
-        generationTime = LocalDateTime.now();
-        String token = UUID.randomUUID().toString();
+    public User getUser() {
+        return user;
     }
+
 
 }

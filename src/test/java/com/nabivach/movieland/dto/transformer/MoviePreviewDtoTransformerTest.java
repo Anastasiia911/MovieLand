@@ -38,8 +38,7 @@ public class MoviePreviewDtoTransformerTest {
         testMovie.setDescription("Good");
 
         MoviePreviewDtoTransformer moviePreviewDtoTransformer= new MoviePreviewDtoTransformer();
-        moviePreviewDtoTransformer.setGenreService(genreService);
-
+        //moviePreviewDtoTransformer.setGenreService(genreService);
         MoviePreviewDto actualPreviewMovieDto = moviePreviewDtoTransformer.transformToDto(testMovie);
 
         //check

@@ -1,13 +1,11 @@
 package com.nabivach.movieland.service;
 
 import com.nabivach.movieland.dto.Credentials;
+import com.nabivach.movieland.entity.User;
+import com.nabivach.movieland.entity.UserToken;
 
 public interface UserService {
 
- String getUserByToken();
-    //check from cache User -using token
-
- boolean checkUserRegistredInDB(Credentials userCredentials);
-    // check mail and pass in DB equal to given in auth window
+    User getUserByCredentials(Credentials userCredentials);
 
 }

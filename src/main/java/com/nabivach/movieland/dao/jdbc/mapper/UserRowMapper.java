@@ -1,15 +1,10 @@
 package com.nabivach.movieland.dao.jdbc.mapper;
 
-import com.nabivach.movieland.entity.Movie;
 import com.nabivach.movieland.entity.User;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Service;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
-@Service
 public class UserRowMapper implements RowMapper<User> {
 
     public User mapRow(ResultSet rs, int i) throws SQLException {

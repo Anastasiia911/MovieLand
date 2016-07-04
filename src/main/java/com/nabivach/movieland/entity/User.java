@@ -6,6 +6,15 @@ public class User { //id, name, email, pass
     private String name;
     private String login;
     private String password; //encrypted
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public int getUserId() {
         return userId;

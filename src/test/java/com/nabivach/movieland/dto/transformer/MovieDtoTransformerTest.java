@@ -50,9 +50,9 @@ public class MovieDtoTransformerTest {
         testMovie.setRating(9);
 //Execute
         MovieDtoTransformer movieDtoTransformer = new MovieDtoTransformer();
-        movieDtoTransformer.setGenreService(genreService);
-        movieDtoTransformer.setCountryService(countryService);
-        movieDtoTransformer.setReviewService(reviewService);
+        //movieDtoTransformer.setGenreService(genreService);
+        //movieDtoTransformer.setCountryService(countryService);
+       // movieDtoTransformer.setReviewService(reviewService);
         MovieDto actualMovieDto = movieDtoTransformer.transformToDto(testMovie);
 
         //Check
