@@ -7,20 +7,21 @@ import com.nabivach.movieland.service.impl.CachedSecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping(name = "/v1")
+@RequestMapping("/v1")
 @Controller
 public class SecurityController {
     private static final Logger LOGGER = LoggerFactory.getLogger(SecurityController.class);
     @Autowired
     CachedSecurityService cachedSecurityService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity authUser(@RequestParam String login, @RequestParam String password) {
         LOGGER.debug("Starting user auth process..");
         final Credentials credentials = new Credentials();
@@ -31,6 +32,8 @@ public class SecurityController {
             token = cachedSecurityService.userAuthGenerateToken(credentials);
 
         } catch (AuthorizationException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }catch (EmptyResultDataAccessException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         LOGGER.debug("Finishing user auth process..");
