@@ -3,6 +3,7 @@ package com.nabivach.movieland.dao.jdbc;
 import com.nabivach.movieland.dao.MovieDao;
 import com.nabivach.movieland.dao.jdbc.mapper.MovieRowMapper;
 import com.nabivach.movieland.dto.MovieRequest;
+import com.nabivach.movieland.dto.MovieSearchRequest;
 import com.nabivach.movieland.entity.Movie;
 import com.nabivach.movieland.util.QueryGenerator;
 import org.slf4j.Logger;
@@ -29,28 +30,32 @@ public class JdbcMovieDao implements MovieDao {
     @Autowired
     private String getMovieByIdSQL;
 
-    private MovieRowMapper movieRowMapper = new MovieRowMapper();
+    private static MovieRowMapper movieRowMapper = new MovieRowMapper();
 
     public List<Movie> getAllMovies(MovieRequest movieRequest) {
         LOGGER.debug("Starting execution SQL query...");
         long startTime = System.currentTimeMillis();
-
         List<Movie> allMovies = jdbcTemplate.query(getGeneratedQuery.getGeneratedQueryAllMovies(movieRequest), movieRowMapper);
-
         long time = System.currentTimeMillis() - startTime;
         LOGGER.info("Result AllMovies was received. It took {} ms", time);
         LOGGER.debug("Finish execution ...");
-
         return allMovies;
     }
 
     public Movie getMovieById(int movieId) {
-        LOGGER.debug("Starting execution SQL query...");
+        LOGGER.debug("Starting execution SQL query getMovieById...");
         long startTime = System.currentTimeMillis();
-        Movie movie = jdbcTemplate.queryForObject(getMovieByIdSQL,new Object[]{movieId}, movieRowMapper);
+        Movie movie = jdbcTemplate.queryForObject(getMovieByIdSQL, new Object[]{movieId}, movieRowMapper);
         long time = System.currentTimeMillis() - startTime;
         LOGGER.info("Result AllMovies was received. It took {} ms", time);
         return movie;
+    }
+
+    public List<Movie> getMoviesSearch(MovieSearchRequest movieSearchRequest) {
+        LOGGER.debug("Start execution of SQL query getMoviesSearch");
+        List<Movie> moviesSearch = jdbcTemplate.query(getGeneratedQuery.getMoviesSearchRequestSQL(movieSearchRequest), movieRowMapper);
+        LOGGER.debug("Stop execution of SQL query getMoviesSearch");
+        return moviesSearch;
     }
 
 }

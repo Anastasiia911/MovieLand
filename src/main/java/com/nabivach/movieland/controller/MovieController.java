@@ -3,21 +3,23 @@ package com.nabivach.movieland.controller;
 import com.nabivach.movieland.dto.MovieDto;
 import com.nabivach.movieland.dto.MoviePreviewDto;
 import com.nabivach.movieland.dto.MovieRequest;
+import com.nabivach.movieland.dto.MovieSearchRequest;
 import com.nabivach.movieland.dto.transformer.ListTransformer;
 import com.nabivach.movieland.dto.transformer.MovieDtoTransformer;
 import com.nabivach.movieland.dto.transformer.MoviePreviewDtoTransformer;
 import com.nabivach.movieland.dto.transformer.MovieRequestTransformer;
 import com.nabivach.movieland.entity.Movie;
 import com.nabivach.movieland.service.impl.PerformanceLoggingMovieService;
-import com.nabivach.movieland.util.Order;
-import org.slf4j.LoggerFactory;
+import com.nabivach.movieland.util.deserializer.JsonReader;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.io.IOException;
 import java.util.List;
 
 @RequestMapping(name = "/v1")
@@ -38,6 +40,10 @@ public class MovieController {
     @Autowired
     private MovieRequestTransformer movieRequestTransformer;
 
+
+    @Autowired
+    private JsonReader jsonReader;
+
     @RequestMapping(name = "/movies", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<MoviePreviewDto> getMovieListJson(@RequestParam(required = false) String rating, @RequestParam(required = false) String price) {
@@ -46,11 +52,10 @@ public class MovieController {
         List<Movie> movies = performanceLoggingMovieService.getAllMovies(movieRequest);
 
         ListTransformer<Movie, MoviePreviewDto> moviePreviewDtoListTransformer = new ListTransformer<>(moviePreviewDtoTransformer);
-
         return moviePreviewDtoListTransformer.transformToDto(movies);
     }
 
-    @RequestMapping(name = "movie/{movieId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(name = "/movie/{movieId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public MovieDto getMovieByIdJson(@PathVariable int movieId) {
         LOGGER.debug("Starting getting movies by id in JSON");
@@ -61,6 +66,22 @@ public class MovieController {
 
         return movieDto;
     }
+
+    @RequestMapping(name = "/movies/search", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<MoviePreviewDto> getMoviesSearchJson(@RequestBody(required = false) String json) throws IOException {
+        LOGGER.debug("Received request for search from user..");
+        MovieSearchRequest movieSearchRequest = jsonReader.parseJson(json, MovieSearchRequest.class);
+        LOGGER.debug("Starting getting movies: user search .. ");
+        List<Movie> movieSearch = performanceLoggingMovieService.getMoviesSearch(movieSearchRequest);
+        ListTransformer<Movie, MoviePreviewDto> moviePreviewDtoListTransformer = new ListTransformer<>(moviePreviewDtoTransformer);
+        List <MoviePreviewDto> movieSearchList=moviePreviewDtoListTransformer.transformToDto(movieSearch);
+        LOGGER.debug("Stop getting movies: user search .. ");
+
+        return movieSearchList;
+    }
+
+
 }
 
 

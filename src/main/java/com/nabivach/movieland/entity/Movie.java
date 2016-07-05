@@ -10,6 +10,7 @@ public class Movie {
     private int releaseYear;
     private List<Country> country;
     private List<Genre> genre;
+    private List<Review> review;
     private String description;
     private double rating;
     private double price;
@@ -85,6 +86,15 @@ public class Movie {
     public void setReleaseYear(int releaseYear) {
         this.releaseYear = releaseYear;
     }
+
+    public List<Review> getReview() {
+        return review;
+    }
+
+    public void setReview(List<Review> review) {
+        this.review = review;
+    }
+
 
     @Override
     public String toString() {

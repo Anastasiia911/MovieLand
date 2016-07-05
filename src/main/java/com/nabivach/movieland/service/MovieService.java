@@ -1,6 +1,7 @@
 package com.nabivach.movieland.service;
 
 import com.nabivach.movieland.dto.MovieRequest;
+import com.nabivach.movieland.dto.MovieSearchRequest;
 import com.nabivach.movieland.entity.Movie;
 import com.nabivach.movieland.util.Order;
 
@@ -12,4 +13,5 @@ public interface MovieService {
 
     List<Movie> getAllMovies(MovieRequest movieRequest);
     Movie getMovieById(int movieId);
+    List <Movie> getMoviesSearch(MovieSearchRequest movieSearchRequest);
 }

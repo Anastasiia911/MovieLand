@@ -2,9 +2,9 @@ package com.nabivach.movieland.dto.transformer;
 
 import com.nabivach.movieland.dto.MovieRequest;
 import com.nabivach.movieland.util.Order;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component("movieRequestTransformer")
+@Service("movieRequestTransformer")
 
 public class MovieRequestTransformer {
 

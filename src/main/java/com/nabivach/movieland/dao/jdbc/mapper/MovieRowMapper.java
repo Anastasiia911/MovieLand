@@ -20,7 +20,6 @@ public class MovieRowMapper implements RowMapper<Movie> {
         movie.setReleaseYear(rs.getInt("release_year"));
         movie.setRating(rs.getDouble("rating"));
 
-
         return movie;
     }
 }
