@@ -8,10 +8,11 @@ import org.springframework.stereotype.Service;
 
 public class MovieRequestTransformer {
 
-    public MovieRequest getMovieRequest(String rating, String price){
+    public MovieRequest getMovieRequest(String rating, String price, int pageNumber){
         MovieRequest movieRequest = new MovieRequest();
         movieRequest.setRating(Order.getOrderForParams(rating));
         movieRequest.setPrice(Order.getOrderForParams(price));
+        movieRequest.setPageNumber(pageNumber);
 
     return movieRequest;
     }
