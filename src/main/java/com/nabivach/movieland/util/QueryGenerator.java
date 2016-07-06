@@ -21,14 +21,14 @@ public class QueryGenerator {
     private final String WHERE_CLAUSE = " where 1=1 ";
     private int countMoviesPerPage =5;
 
-    public StringBuilder getGeneratedQueryAllMovies(MovieRequest movieRequest) {
+    public String getGeneratedQueryAllMovies(MovieRequest movieRequest) {
         StringBuilder sql = new StringBuilder(getAllMoviesSQL + " order by rating " + movieRequest.getRating() + ", price " + movieRequest.getPrice());
         sql.append(" LIMIT ");
         sql.append(countMoviesPerPage);
         sql.append(" OFFSET ");
         sql.append(countMoviesPerPage * (movieRequest.getPageNumber() - 1));
 
-        return sql;
+        return sql.toString();
     }
 
     public String getMoviesSearchRequestSQL(MovieSearchRequest movieSearchRequest) {
