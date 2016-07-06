@@ -56,6 +56,10 @@
     join genre on genre.id = movie_ganre.genre_id
     join country on country.id = movie_country.country_id"/>
     </bean>
+
+    <bean id="getUserByCredentials" class="java.lang.String">
+    <constructor-arg value="SELECT id, name, email, pass FROM movieUser WHERE is_deleted = false AND email = :email"/>
+</bean>
     <!-- JDBC TEMPLATE-->
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">

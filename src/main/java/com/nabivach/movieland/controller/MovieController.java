@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@RequestMapping(name = "/v1")
+@RequestMapping( "/v1")
 @Controller
 public class MovieController {
 
@@ -44,7 +44,7 @@ public class MovieController {
     @Autowired
     private JsonReader jsonReader;
 
-    @RequestMapping(name = "/movies", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/movies", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<MoviePreviewDto> getMovieListJson(@RequestParam(required = false) String rating, @RequestParam(required = false) String price) {
         LOGGER.debug("Starting getting all movies in JSON");
@@ -55,7 +55,7 @@ public class MovieController {
         return moviePreviewDtoListTransformer.transformToDto(movies);
     }
 
-    @RequestMapping(name = "/movie/{movieId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/movie/{movieId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public MovieDto getMovieByIdJson(@PathVariable int movieId) {
         LOGGER.debug("Starting getting movies by id in JSON");
@@ -67,9 +67,9 @@ public class MovieController {
         return movieDto;
     }
 
-    @RequestMapping(name = "/movies/search", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/movies/search", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<MoviePreviewDto> getMoviesSearchJson(@RequestBody(required = false) String json) throws IOException {
+    public List<MoviePreviewDto> getMoviesSearchJson(@RequestBody String json) throws IOException {
         LOGGER.debug("Received request for search from user..");
         MovieSearchRequest movieSearchRequest = jsonReader.parseJson(json, MovieSearchRequest.class);
         LOGGER.debug("Starting getting movies: user search .. ");
