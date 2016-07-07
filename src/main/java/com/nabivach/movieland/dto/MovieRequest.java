@@ -8,6 +8,15 @@ public class MovieRequest {
     //Parameters ENUMS
     private Order rating;
     private Order price;
+    private int pageNumber;
+
+    public int getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber(int pageNumber) {
+        this.pageNumber = pageNumber;
+    }
 
     public Order getRating() {
         return rating;
