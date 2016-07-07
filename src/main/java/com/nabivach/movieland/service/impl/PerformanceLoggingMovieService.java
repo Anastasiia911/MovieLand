@@ -1,5 +1,6 @@
 package com.nabivach.movieland.service.impl;
 
+import com.nabivach.movieland.dto.AddReviewRequest;
 import com.nabivach.movieland.dto.MovieRequest;
 import com.nabivach.movieland.dto.MovieSearchRequest;
 import com.nabivach.movieland.entity.Movie;
@@ -48,10 +49,19 @@ public class PerformanceLoggingMovieService implements MovieService {
     public List<Movie> getMoviesSearch(MovieSearchRequest movieSearchRequest) {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
-        List<Movie> movieSearchList= movieService.getMoviesSearch(movieSearchRequest);
+        List<Movie> movieSearchList = movieService.getMoviesSearch(movieSearchRequest);
         stopWatch.stop();
         LOGGER.debug("All Movies for user search were received. It took {} ms ", stopWatch.getTotalTimeMillis());
         return movieSearchList;
+    }
+
+    public void addReviewForMovie(AddReviewRequest addReviewRequest) {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        stopWatch.stop();
+
+        LOGGER.debug("Finishing adding review it took {} ms", stopWatch.getTotalTimeMillis());
+
     }
 
 

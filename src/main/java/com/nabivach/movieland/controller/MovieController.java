@@ -1,9 +1,6 @@
 package com.nabivach.movieland.controller;
 
-import com.nabivach.movieland.dto.MovieDto;
-import com.nabivach.movieland.dto.MoviePreviewDto;
-import com.nabivach.movieland.dto.MovieRequest;
-import com.nabivach.movieland.dto.MovieSearchRequest;
+import com.nabivach.movieland.dto.*;
 import com.nabivach.movieland.dto.transformer.ListTransformer;
 import com.nabivach.movieland.dto.transformer.MovieDtoTransformer;
 import com.nabivach.movieland.dto.transformer.MoviePreviewDtoTransformer;
@@ -81,6 +78,13 @@ public class MovieController {
         return movieSearchList;
     }
 
+    @RequestMapping(value = "/review", method = RequestMethod.POST)
+    @ResponseBody
+    public void addReviewForMovie(@RequestBody String json) throws IOException {
+        LOGGER.debug("Receive drequest for adding movie review");
+        AddReviewRequest addReviewRequest = jsonReader.parseJson(json, AddReviewRequest.class);
+        performanceLoggingMovieService.addReviewForMovie(addReviewRequest);
+    }
 
 }
 
