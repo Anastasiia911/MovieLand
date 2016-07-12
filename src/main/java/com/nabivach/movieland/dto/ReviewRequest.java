@@ -1,9 +1,10 @@
 package com.nabivach.movieland.dto;
 
-public class AddReviewRequest {
+public class ReviewRequest {
     private int authId;
     private int movieId;
     private String review;
+    private int authIdForDeletion;
 
     public int getAuthId() {
         return authId;
@@ -27,5 +28,9 @@ public class AddReviewRequest {
 
     public void setReview(String review) {
         this.review = review;
+    }
+
+    public void setAuthIdForDeletion(int authIdForDeletion) {
+        this.authIdForDeletion = authIdForDeletion;
     }
 }

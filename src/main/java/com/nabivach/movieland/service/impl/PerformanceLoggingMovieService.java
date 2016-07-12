@@ -1,11 +1,9 @@
 package com.nabivach.movieland.service.impl;
 
-import com.nabivach.movieland.dto.AddReviewRequest;
 import com.nabivach.movieland.dto.MovieRequest;
 import com.nabivach.movieland.dto.MovieSearchRequest;
 import com.nabivach.movieland.entity.Movie;
 import com.nabivach.movieland.service.MovieService;
-import com.nabivach.movieland.util.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,15 +51,6 @@ public class PerformanceLoggingMovieService implements MovieService {
         stopWatch.stop();
         LOGGER.debug("All Movies for user search were received. It took {} ms ", stopWatch.getTotalTimeMillis());
         return movieSearchList;
-    }
-
-    public void addReviewForMovie(AddReviewRequest addReviewRequest) {
-        StopWatch stopWatch = new StopWatch();
-        stopWatch.start();
-        stopWatch.stop();
-
-        LOGGER.debug("Finishing adding review it took {} ms", stopWatch.getTotalTimeMillis());
-
     }
 
 

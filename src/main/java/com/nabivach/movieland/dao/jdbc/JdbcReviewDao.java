@@ -2,7 +2,9 @@ package com.nabivach.movieland.dao.jdbc;
 
 import com.nabivach.movieland.dao.ReviewDao;
 import com.nabivach.movieland.dao.jdbc.mapper.ReviewRowMapper;
+import com.nabivach.movieland.dto.ReviewRequest;
 import com.nabivach.movieland.entity.Review;
+import com.nabivach.movieland.util.QueryGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,11 @@ public class JdbcReviewDao implements ReviewDao {
 
     @Autowired
     private String getReviewForMovieSQL;
+
+    @Autowired
+    private QueryGenerator queryGenerator;
+
+
     private ReviewRowMapper reviewRowMapper = new ReviewRowMapper();
 
     public List<Review> getReviewForMovie(int movieId) {
@@ -31,6 +38,13 @@ public class JdbcReviewDao implements ReviewDao {
         LOGGER.info("Result getReviewForMovie was received. It took {} ms", time);
         LOGGER.debug("Finish execution ...");
         return reviews;
+    }
+
+    @Override
+    public void addReview(ReviewRequest reviewRequest) {
+        LOGGER.debug("Starting executing insert users review..");
+        jdbcTemplate.update(queryGenerator.addReviewRequestSQL(reviewRequest));
+        LOGGER.debug("Finish executing inserts users review..");
     }
 
 }
