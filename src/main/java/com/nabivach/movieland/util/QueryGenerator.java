@@ -1,5 +1,6 @@
 package com.nabivach.movieland.util;
 
+import com.nabivach.movieland.dto.ReviewDeletionRequest;
 import com.nabivach.movieland.dto.ReviewRequest;
 import com.nabivach.movieland.dto.MovieRequest;
 import com.nabivach.movieland.dto.MovieSearchRequest;
@@ -26,6 +27,9 @@ public class QueryGenerator {
 
     @Autowired
     private String addReviewSQL;
+
+    @Autowired
+    private String deleteReviewRequestSQL;
 
     private final String WHERE_CLAUSE = " where 1=1 ";
     private int countMoviesPerPage = 5;
@@ -62,12 +66,18 @@ public class QueryGenerator {
 
     public String addReviewRequestSQL(ReviewRequest reviewRequest) {
         StringBuilder sql = new StringBuilder(addReviewSQL);
-       sql.append(reviewRequest.getAuthId());
+        sql.append(reviewRequest.getAuthId());
         sql.append(",");
         sql.append(reviewRequest.getMovieId());
         sql.append(",'");
         sql.append(reviewRequest.getReview());
         sql.append("')");
+        return sql.toString();
+    }
+
+    public String deleteReviewRequestSQL(ReviewDeletionRequest reviewDeletionRequest) {
+        StringBuilder sql = new StringBuilder(deleteReviewRequestSQL);
+        sql.append(reviewDeletionRequest.getReviewId());
         return sql.toString();
     }
 }

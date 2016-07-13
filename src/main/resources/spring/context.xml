@@ -53,6 +53,10 @@
         <constructor-arg value="insert into review (movieuser_id, movie_id, description) values (  "/>
     </bean>
 
+        <bean id="deleteReviewRequestSQL" class="java.lang.String">
+        <constructor-arg value="delete from review r where r.id = "/>
+    </bean>
+
     <bean id="getMoviesSearchRequestPrefix" class="java.lang.String">
         <constructor-arg value="SELECT DISTINCT movie.id, movie.name, movie.original_name, movie.release_year, movie.rating FROM movie
     join movie_ganre on movie.id = movie_ganre.movie_id

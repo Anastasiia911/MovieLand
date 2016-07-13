@@ -4,7 +4,6 @@ public class ReviewRequest {
     private int authId;
     private int movieId;
     private String review;
-    private int authIdForDeletion;
 
     public int getAuthId() {
         return authId;
@@ -30,7 +29,5 @@ public class ReviewRequest {
         this.review = review;
     }
 
-    public void setAuthIdForDeletion(int authIdForDeletion) {
-        this.authIdForDeletion = authIdForDeletion;
     }
-}
+

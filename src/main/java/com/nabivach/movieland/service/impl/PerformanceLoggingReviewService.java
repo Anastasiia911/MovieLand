@@ -1,4 +1,5 @@
 package com.nabivach.movieland.service.impl;
+import com.nabivach.movieland.dto.ReviewDeletionRequest;
 import com.nabivach.movieland.dto.ReviewRequest;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,9 @@ private static final Logger LOGGER = LoggerFactory.getLogger(PerformanceLoggingR
         genericReviewService.addReview(reviewRequest);
         stopWatch.stop();
         LOGGER.debug("Finishing adding review it took {} ms", stopWatch.getTotalTimeMillis());
+    }
+
+    public void deleteReview(ReviewDeletionRequest reviewDeletionRequest){
+       genericReviewService.deleteReview(reviewDeletionRequest);
     }
 }

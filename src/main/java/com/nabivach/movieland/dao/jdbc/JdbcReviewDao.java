@@ -2,6 +2,7 @@ package com.nabivach.movieland.dao.jdbc;
 
 import com.nabivach.movieland.dao.ReviewDao;
 import com.nabivach.movieland.dao.jdbc.mapper.ReviewRowMapper;
+import com.nabivach.movieland.dto.ReviewDeletionRequest;
 import com.nabivach.movieland.dto.ReviewRequest;
 import com.nabivach.movieland.entity.Review;
 import com.nabivach.movieland.util.QueryGenerator;
@@ -44,6 +45,13 @@ public class JdbcReviewDao implements ReviewDao {
     public void addReview(ReviewRequest reviewRequest) {
         LOGGER.debug("Starting executing insert users review..");
         jdbcTemplate.update(queryGenerator.addReviewRequestSQL(reviewRequest));
+        LOGGER.debug("Finish executing inserts users review..");
+    }
+
+    @Override
+    public void deleteReview(ReviewDeletionRequest reviewDeletionRequest) {
+        LOGGER.debug("Starting executing insert users review..");
+        jdbcTemplate.update(queryGenerator.deleteReviewRequestSQL(reviewDeletionRequest));
         LOGGER.debug("Finish executing inserts users review..");
     }
 

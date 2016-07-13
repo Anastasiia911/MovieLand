@@ -29,8 +29,6 @@ public class MovieController {
     @Autowired
     private PerformanceLoggingMovieService performanceLoggingMovieService;
 
-    @Autowired
-    private PerformanceLoggingReviewService performanceLoggingReviewService;
 
     @Autowired
     private MoviePreviewDtoTransformer moviePreviewDtoTransformer;
@@ -75,20 +73,6 @@ public class MovieController {
         List<MoviePreviewDto> movieSearchList = moviePreviewDtoListTransformer.transformToDto(movieSearch);
         LOGGER.debug("Stop getting movies: user search .. ");
         return movieSearchList;
-    }
-
-    @RequestMapping(value = "/review", method = RequestMethod.POST)
-    @ResponseBody
-    public void addReviewForMovie(@RequestBody String json) throws IOException {
-        LOGGER.debug("Receive request for adding movie review..");
-        ReviewRequest reviewRequest = jsonReader.parseJson(json, ReviewRequest.class);
-        performanceLoggingReviewService.addReviewForMovie(reviewRequest);
-        LOGGER.debug("Movie review was added..");
-    }
-
-    @RequestMapping(value="/review",method = RequestMethod.DELETE)
-    @ResponseBody
-    public void deleteReviewForMovie(@RequestParam int movieId){
     }
 }
 
