@@ -22,7 +22,6 @@ public class GenericReviewService implements ReviewService {
 
     public void addReview(ReviewRequest reviewRequest) {
         reviewDao.addReview(reviewRequest);
-
     }
 
     public void deleteReview(ReviewDeletionRequest reviewDeletionRequest) {
