@@ -1,15 +1,24 @@
 package com.nabivach.movieland.dto;
 
 public class ReviewDeletionRequest {
-    private int authId;
+    private String authToken;
     private int reviewId;
+    private int userId;
 
-    public int getAuthId() {
-        return authId;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setAuthId(int authId) {
-        this.authId = authId;
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 
     public int getReviewId() {

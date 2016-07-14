@@ -22,6 +22,9 @@ public class ReviewController {
     @Autowired
     private JsonReader jsonReader;
 
+    @Autowired
+    private SecurityController securityController;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(ReviewController.class);
 
     @RequestMapping(value = "/review", method = RequestMethod.POST)
@@ -36,10 +39,11 @@ public class ReviewController {
 
     @RequestMapping(value = "/review", method = RequestMethod.DELETE)
     @ResponseBody
-    public String deleteReviewForMovie(@RequestParam int reviewId) {
+    public String deleteReviewForMovie(@RequestHeader(value = "user-token") String token, @RequestParam int reviewId) {
         LOGGER.debug("Receive request for deletion movie review number {}..", reviewId);
-        ReviewDeletionRequest reviewDeletionRequest= new ReviewDeletionRequest();
+        ReviewDeletionRequest reviewDeletionRequest = new ReviewDeletionRequest();
         reviewDeletionRequest.setReviewId(reviewId);
+        reviewDeletionRequest.setAuthToken(token);
         performanceLoggingReviewService.deleteReview(reviewDeletionRequest);
         LOGGER.debug("Movie review was deleted - review id {}..", reviewId);
         return " Review number " + reviewId + " was deleted...";

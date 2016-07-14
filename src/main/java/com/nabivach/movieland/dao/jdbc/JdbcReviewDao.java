@@ -55,6 +55,15 @@ public class JdbcReviewDao implements ReviewDao {
         LOGGER.debug("Finish executing inserts users review..");
     }
 
+    @Override
+    public boolean checkIsReviewOwnedByUser(int userId, ReviewDeletionRequest reviewDeletionRequest) {
+        boolean isReviewOwnedByUser = false;
+             if( jdbcTemplate.queryForObject(queryGenerator.checkReviewOwnedByUserSQL(userId,reviewDeletionRequest),Integer.class) >0){
+                 isReviewOwnedByUser =true;
+             }
+        return isReviewOwnedByUser;
+    }
+
 }
 
 

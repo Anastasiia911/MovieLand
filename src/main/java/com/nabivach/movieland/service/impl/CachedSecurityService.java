@@ -47,16 +47,25 @@ public class CachedSecurityService implements SecurityService {
         }
     }
 
-    //checkUserInDB
     private void validateUser(User user) throws AuthorizationException {
         if (user == null) {
             LOGGER.warn("No such user in DB");
-            throw new AuthorizationException("No such user in DB/Incorrect login");
-        }
+            throw new AuthorizationException("No such user in DB/Incorrect login");}
+
     }
 
-    private UserToken validateToken(UserToken userToken){
+  public int getUserIdByToken(String token){
 
+      for (UserToken userToken : tokenCache) {
+          if (userToken.getToken()==token){
+             int userId =  userToken.getUser().getUserId();
+              return userId;
+          }
+      }
+      return 0;
+  }
+
+    private UserToken validateToken(UserToken userToken) {
         return userToken;
     }
 

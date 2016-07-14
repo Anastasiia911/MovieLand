@@ -23,6 +23,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(PerformanceLoggingR
     }
 
     public void deleteReview(ReviewDeletionRequest reviewDeletionRequest){
+        
        genericReviewService.deleteReview(reviewDeletionRequest);
     }
 }

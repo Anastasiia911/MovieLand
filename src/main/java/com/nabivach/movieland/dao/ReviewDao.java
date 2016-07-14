@@ -13,4 +13,5 @@ public interface ReviewDao {
     List<Review> getReviewForMovie(int movieId);
     void addReview(ReviewRequest reviewRequest);
     void deleteReview(ReviewDeletionRequest reviewDeletionRequest);
+    boolean checkIsReviewOwnedByUser(int userId, ReviewDeletionRequest reviewDeletionRequest);
 }

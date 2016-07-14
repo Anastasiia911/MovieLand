@@ -13,6 +13,9 @@ public class QueryGenerator {
     @Autowired
     private String getAllMoviesSQL;
 
+    @Autowired
+    private String checkReviewOwnedByUserSQL;
+
     public void setGetMoviesSearchRequestPrefix(String getMoviesSearchRequestPrefix) {
         this.getMoviesSearchRequestPrefix = getMoviesSearchRequestPrefix;
     }
@@ -77,6 +80,14 @@ public class QueryGenerator {
 
     public String deleteReviewRequestSQL(ReviewDeletionRequest reviewDeletionRequest) {
         StringBuilder sql = new StringBuilder(deleteReviewRequestSQL);
+        sql.append(reviewDeletionRequest.getReviewId());
+        return sql.toString();
+    }
+
+    public String checkReviewOwnedByUserSQL(int userId, ReviewDeletionRequest reviewDeletionRequest) {
+        StringBuilder sql = new StringBuilder(checkReviewOwnedByUserSQL);
+        sql.append(userId);
+        sql.append(" and rv.id= ");
         sql.append(reviewDeletionRequest.getReviewId());
         return sql.toString();
     }

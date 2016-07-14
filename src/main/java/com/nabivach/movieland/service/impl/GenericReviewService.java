@@ -16,6 +16,9 @@ public class GenericReviewService implements ReviewService {
     @Autowired
     private ReviewDao reviewDao;
 
+    @Autowired
+    private CachedSecurityService cachedSecurityService;
+
     public List<Review> getReviewForMovies(int movieId) {
         return reviewDao.getReviewForMovie(movieId);
     }
@@ -25,6 +28,8 @@ public class GenericReviewService implements ReviewService {
     }
 
     public void deleteReview(ReviewDeletionRequest reviewDeletionRequest) {
-        reviewDao.deleteReview(reviewDeletionRequest);
+        if (reviewDao.checkIsReviewOwnedByUser(cachedSecurityService.getUserIdByToken(reviewDeletionRequest.getAuthToken()), reviewDeletionRequest)) {
+            reviewDao.deleteReview(reviewDeletionRequest);
+        }
     }
 }
