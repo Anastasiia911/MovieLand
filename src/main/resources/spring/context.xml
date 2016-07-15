@@ -49,6 +49,18 @@
         <constructor-arg value="select g.name,mg.movie_id  from movie_ganre mg join genre g on mg.genre_id = g.id"/>
     </bean>
 
+    <bean id="addReviewSQL" class="java.lang.String">
+        <constructor-arg value="insert into review (movieuser_id, movie_id, description) values (  "/>
+    </bean>
+
+    <bean id="deleteReviewRequestSQL" class="java.lang.String">
+        <constructor-arg value="delete from review r where r.id = "/>
+    </bean>
+
+    <bean id="checkReviewOwnedByUserSQL" class="java.lang.String">
+        <constructor-arg value="select count(*) from review rv where rv.movieuser_id = "/>
+    </bean>
+
     <bean id="getMoviesSearchRequestPrefix" class="java.lang.String">
         <constructor-arg value="SELECT DISTINCT movie.id, movie.name, movie.original_name, movie.release_year, movie.rating FROM movie
     join movie_ganre on movie.id = movie_ganre.movie_id
@@ -58,8 +70,9 @@
     </bean>
 
     <bean id="getUserByCredentials" class="java.lang.String">
-    <constructor-arg value="SELECT id, name, email, pass FROM movieUser WHERE is_deleted = false AND email = :email"/>
-</bean>
+        <constructor-arg
+                value="SELECT id, name, email, pass FROM movieUser WHERE is_deleted = false AND email = :email"/>
+    </bean>
     <!-- JDBC TEMPLATE-->
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">

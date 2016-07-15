@@ -4,7 +4,6 @@ import com.nabivach.movieland.dto.MovieRequest;
 import com.nabivach.movieland.dto.MovieSearchRequest;
 import com.nabivach.movieland.entity.Movie;
 import com.nabivach.movieland.service.MovieService;
-import com.nabivach.movieland.util.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +47,7 @@ public class PerformanceLoggingMovieService implements MovieService {
     public List<Movie> getMoviesSearch(MovieSearchRequest movieSearchRequest) {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
-        List<Movie> movieSearchList= movieService.getMoviesSearch(movieSearchRequest);
+        List<Movie> movieSearchList = movieService.getMoviesSearch(movieSearchRequest);
         stopWatch.stop();
         LOGGER.debug("All Movies for user search were received. It took {} ms ", stopWatch.getTotalTimeMillis());
         return movieSearchList;

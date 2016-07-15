@@ -1,15 +1,13 @@
 package com.nabivach.movieland.controller;
 
-import com.nabivach.movieland.dto.MovieDto;
-import com.nabivach.movieland.dto.MoviePreviewDto;
-import com.nabivach.movieland.dto.MovieRequest;
-import com.nabivach.movieland.dto.MovieSearchRequest;
+import com.nabivach.movieland.dto.*;
 import com.nabivach.movieland.dto.transformer.ListTransformer;
 import com.nabivach.movieland.dto.transformer.MovieDtoTransformer;
 import com.nabivach.movieland.dto.transformer.MoviePreviewDtoTransformer;
 import com.nabivach.movieland.dto.transformer.MovieRequestTransformer;
 import com.nabivach.movieland.entity.Movie;
 import com.nabivach.movieland.service.impl.PerformanceLoggingMovieService;
+import com.nabivach.movieland.service.impl.PerformanceLoggingReviewService;
 import com.nabivach.movieland.util.deserializer.JsonReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@RequestMapping( "/v1")
+@RequestMapping("/v1")
 @Controller
 public class MovieController {
 
@@ -30,6 +28,7 @@ public class MovieController {
 
     @Autowired
     private PerformanceLoggingMovieService performanceLoggingMovieService;
+
 
     @Autowired
     private MoviePreviewDtoTransformer moviePreviewDtoTransformer;
@@ -48,9 +47,8 @@ public class MovieController {
     @ResponseBody
     public List<MoviePreviewDto> getMovieListJson(@RequestParam(required = false) String rating, @RequestParam(required = false) String price, @RequestParam(defaultValue = "1") int pageNumber) {
         LOGGER.debug("Starting getting all movies in JSON");
-        MovieRequest movieRequest = movieRequestTransformer.getMovieRequest(rating,price,pageNumber);
+        MovieRequest movieRequest = movieRequestTransformer.getMovieRequest(rating, price, pageNumber);
         List<Movie> movies = performanceLoggingMovieService.getAllMovies(movieRequest);
-
         ListTransformer<Movie, MoviePreviewDto> moviePreviewDtoListTransformer = new ListTransformer<>(moviePreviewDtoTransformer);
         return moviePreviewDtoListTransformer.transformToDto(movies);
     }
@@ -59,11 +57,8 @@ public class MovieController {
     @ResponseBody
     public MovieDto getMovieByIdJson(@PathVariable int movieId) {
         LOGGER.debug("Starting getting movies by id in JSON");
-
         Movie movie = performanceLoggingMovieService.getMovieById(movieId);
-
         MovieDto movieDto = movieDtoTransformer.transformToDto(movie);
-
         return movieDto;
     }
 
@@ -75,13 +70,10 @@ public class MovieController {
         LOGGER.debug("Starting getting movies: user search .. ");
         List<Movie> movieSearch = performanceLoggingMovieService.getMoviesSearch(movieSearchRequest);
         ListTransformer<Movie, MoviePreviewDto> moviePreviewDtoListTransformer = new ListTransformer<>(moviePreviewDtoTransformer);
-        List <MoviePreviewDto> movieSearchList=moviePreviewDtoListTransformer.transformToDto(movieSearch);
+        List<MoviePreviewDto> movieSearchList = moviePreviewDtoListTransformer.transformToDto(movieSearch);
         LOGGER.debug("Stop getting movies: user search .. ");
-
         return movieSearchList;
     }
-
-
 }
 
 
