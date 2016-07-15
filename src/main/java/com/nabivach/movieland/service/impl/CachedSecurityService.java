@@ -55,13 +55,15 @@ public class CachedSecurityService implements SecurityService {
     }
 
   public int getUserIdByToken(String token){
-
+      LOGGER.debug("Start getting User by token..");
       for (UserToken userToken : tokenCache) {
-          if (userToken.getToken()==token){
+          if (userToken.getToken().equals(token)){
+              LOGGER.debug("UserToken from token cache has user token..");
              int userId =  userToken.getUser().getUserId();
               return userId;
           }
       }
+      LOGGER.debug("No user token in cahe found..");
       return 0;
   }
 

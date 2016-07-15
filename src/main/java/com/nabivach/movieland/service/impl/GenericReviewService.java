@@ -28,7 +28,8 @@ public class GenericReviewService implements ReviewService {
     }
 
     public void deleteReview(ReviewDeletionRequest reviewDeletionRequest) {
-        if (reviewDao.checkIsReviewOwnedByUser(cachedSecurityService.getUserIdByToken(reviewDeletionRequest.getAuthToken()), reviewDeletionRequest)) {
+       int userId = cachedSecurityService.getUserIdByToken(reviewDeletionRequest.getAuthToken());
+        if (reviewDao.checkIsReviewOwnedByUser(userId, reviewDeletionRequest)) {
             reviewDao.deleteReview(reviewDeletionRequest);
         }
     }

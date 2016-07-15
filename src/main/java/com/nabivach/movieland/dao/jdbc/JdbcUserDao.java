@@ -29,7 +29,7 @@ public class JdbcUserDao implements UserDao {
         LOGGER.debug("Start getting user from DB by mail {}", mail);
         User user = jdbcTemplate.queryForObject(getUserByCredentials, parameterSource, userRowMapper);
 
-        LOGGER.debug("Finishing getting user from DB by mail {}", mail);
+        LOGGER.debug("Finishing getting user from DB {}", user);
         return user;
     }
 }

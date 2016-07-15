@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
 @Controller
-public class ReviewController {
 
+@RequestMapping("/v1")
+
+public class ReviewController {
 
     @Autowired
     private PerformanceLoggingReviewService performanceLoggingReviewService;
@@ -34,7 +36,7 @@ public class ReviewController {
         ReviewRequest reviewRequest = jsonReader.parseJson(json, ReviewRequest.class);
         performanceLoggingReviewService.addReviewForMovie(reviewRequest);
         LOGGER.debug("Movie review was added..");
-        return json.toString();
+        return json;
     }
 
     @RequestMapping(value = "/review", method = RequestMethod.DELETE)
