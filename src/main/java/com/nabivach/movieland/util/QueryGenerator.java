@@ -16,23 +16,31 @@ public class QueryGenerator {
     @Autowired
     private String checkReviewOwnedByUserSQL;
 
+
+    public void setCheckReviewOwnedByUserSQL(String checkReviewOwnedByUserSQL) {
+        this.checkReviewOwnedByUserSQL = checkReviewOwnedByUserSQL;
+    }
+
+    @Autowired
+    private String getMoviesSearchRequestPrefix;
+
     public void setGetMoviesSearchRequestPrefix(String getMoviesSearchRequestPrefix) {
         this.getMoviesSearchRequestPrefix = getMoviesSearchRequestPrefix;
     }
+
+    @Autowired
+    private String addReviewSQL;
 
     public void setAddReviewSQL(String addReviewSQL) {
         this.addReviewSQL = addReviewSQL;
     }
 
     @Autowired
-    private String getMoviesSearchRequestPrefix;
-
-
-    @Autowired
-    private String addReviewSQL;
-
-    @Autowired
     private String deleteReviewRequestSQL;
+
+    public void setDeleteReviewRequestSQL(String deleteReviewRequestSQL) {
+        this.deleteReviewRequestSQL = deleteReviewRequestSQL;
+    }
 
     private final String WHERE_CLAUSE = " where 1=1 ";
     private int countMoviesPerPage = 5;

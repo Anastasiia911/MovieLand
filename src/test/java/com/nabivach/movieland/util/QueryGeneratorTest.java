@@ -1,5 +1,6 @@
 package com.nabivach.movieland.util;
 
+import com.nabivach.movieland.dto.ReviewDeletionRequest;
 import com.nabivach.movieland.dto.ReviewRequest;
 import com.nabivach.movieland.dto.MovieSearchRequest;
 import junit.framework.TestCase;
@@ -37,5 +38,23 @@ public class QueryGeneratorTest extends TestCase {
         when(reviewRequest.getMovieId()).thenReturn(1);
         when(reviewRequest.getReview()).thenReturn("Fucking Perfect !!!!!!!!");
         assertEquals(queryGenerator.addReviewRequestSQL(reviewRequest),"insert into review (movieuser_id,movie_id, description) values (5,1,'Fucking Perfect !!!!!!!!')");
+    }
+
+    public void testCheckReviewOwnedByUser() throws Exception {
+        queryGenerator.setCheckReviewOwnedByUserSQL("select count(*) from review rv where rv.movieuser_id = ");
+        int userId =1;
+        ReviewDeletionRequest reviewDeletionRequest = mock(ReviewDeletionRequest.class);
+        when (reviewDeletionRequest.getAuthToken()).thenReturn("55");
+        when(reviewDeletionRequest.getReviewId()).thenReturn(7);
+        assertEquals(queryGenerator.checkReviewOwnedByUserSQL(userId,reviewDeletionRequest),"select count(*) from review rv where rv.movieuser_id = 1 and rv.id= 7");
+
+    }
+
+    public void testDeleteReviewRequestSQL() throws Exception {
+        queryGenerator.setDeleteReviewRequestSQL("delete from review r where r.id = ");
+        ReviewDeletionRequest reviewDeletionRequest = mock(ReviewDeletionRequest.class);
+        when (reviewDeletionRequest.getReviewId()).thenReturn(7);
+        assertEquals(queryGenerator.deleteReviewRequestSQL(reviewDeletionRequest), "delete from review r where r.id = 7");
+
     }
 }
