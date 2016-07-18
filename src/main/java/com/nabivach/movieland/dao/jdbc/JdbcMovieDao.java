@@ -2,6 +2,7 @@ package com.nabivach.movieland.dao.jdbc;
 
 import com.nabivach.movieland.dao.MovieDao;
 import com.nabivach.movieland.dao.jdbc.mapper.MovieRowMapper;
+import com.nabivach.movieland.dto.MovieByIdRequest;
 import com.nabivach.movieland.dto.MovieRequest;
 import com.nabivach.movieland.dto.MovieSearchRequest;
 import com.nabivach.movieland.entity.Movie;
@@ -42,10 +43,10 @@ public class JdbcMovieDao implements MovieDao {
         return allMovies;
     }
 
-    public Movie getMovieById(int movieId) {
+    public Movie getMovieById(MovieByIdRequest movieByIdRequest) {
         LOGGER.debug("Starting execution SQL query getMovieById...");
         long startTime = System.currentTimeMillis();
-        Movie movie = jdbcTemplate.queryForObject(getMovieByIdSQL, new Object[]{movieId}, movieRowMapper);
+        Movie movie = jdbcTemplate.queryForObject(getMovieByIdSQL, new Object[]{movieByIdRequest.getMovieId()}, movieRowMapper);
         long time = System.currentTimeMillis() - startTime;
         LOGGER.info("Result AllMovies was received. It took {} ms", time);
         return movie;

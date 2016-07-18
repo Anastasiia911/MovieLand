@@ -1,6 +1,7 @@
 package com.nabivach.movieland.service.impl;
 
 import com.nabivach.movieland.dao.ReviewDao;
+import com.nabivach.movieland.dto.MovieByIdRequest;
 import com.nabivach.movieland.dto.ReviewDeletionRequest;
 import com.nabivach.movieland.dto.ReviewRequest;
 import com.nabivach.movieland.entity.Review;
@@ -19,8 +20,8 @@ public class GenericReviewService implements ReviewService {
     @Autowired
     private CachedSecurityService cachedSecurityService;
 
-    public List<Review> getReviewForMovies(int movieId) {
-        return reviewDao.getReviewForMovie(movieId);
+    public List<Review> getReviewForMovies(MovieByIdRequest movieByIdRequest) {
+        return reviewDao.getReviewForMovie(movieByIdRequest.getMovieId());
     }
 
     public void addReview(ReviewRequest reviewRequest) {

@@ -1,6 +1,7 @@
 package com.nabivach.movieland.service.impl;
 
 import com.nabivach.movieland.dao.MovieDao;
+import com.nabivach.movieland.dto.MovieByIdRequest;
 import com.nabivach.movieland.dto.MovieRequest;
 import com.nabivach.movieland.dto.MovieSearchRequest;
 import com.nabivach.movieland.entity.Movie;
@@ -28,11 +29,11 @@ public class GenericMovieService implements MovieService {
         return movieDao.getAllMovies(movieRequest);
     }
 
-    public Movie getMovieById(int movieId) {
-        Movie movie = movieDao.getMovieById(movieId);
-        movie.setGenre(cachingGenreService.getGenresForMovie(movieId));
-        movie.setCountry(countryService.getCountryForMovies(movieId));
-        movie.setReview(reviewService.getReviewForMovies(movieId));
+    public Movie getMovieById(MovieByIdRequest movieByIdRequest) {
+        Movie movie = movieDao.getMovieById(movieByIdRequest);
+        movie.setGenre(cachingGenreService.getGenresForMovie(movieByIdRequest));
+        movie.setCountry(countryService.getCountryForMovies(movieByIdRequest));
+        movie.setReview(reviewService.getReviewForMovies(movieByIdRequest));
         return movie;
     }
 

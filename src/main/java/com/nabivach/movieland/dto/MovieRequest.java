@@ -8,6 +8,7 @@ public class MovieRequest {
     //Parameters ENUMS
     private Order rating;
     private Order price;
+    private String currency;
     private int pageNumber;
 
     public int getPageNumber() {
@@ -32,5 +33,13 @@ public class MovieRequest {
 
     public void setPrice(Order price) {
         this.price = price;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }

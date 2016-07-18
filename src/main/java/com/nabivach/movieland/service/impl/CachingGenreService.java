@@ -1,6 +1,7 @@
 package com.nabivach.movieland.service.impl;
 
 import com.nabivach.movieland.dao.GenreDao;
+import com.nabivach.movieland.dto.MovieByIdRequest;
 import com.nabivach.movieland.entity.Genre;
 import com.nabivach.movieland.service.GenreService;
 
@@ -25,9 +26,9 @@ public class CachingGenreService implements GenreService {
     private Map<Integer, List<Genre>> movieIdGenresCache = new ConcurrentHashMap<>();
 
         @Override
-    public List<Genre> getGenresForMovie(int movieId) {
+    public List<Genre> getGenresForMovie(MovieByIdRequest movieByIdRequest) {
         LOGGER.debug("Start getting cache by movieId..");
-        return movieIdGenresCache.get(movieId);
+        return movieIdGenresCache.get(movieByIdRequest.getMovieId());
     }
 
     @Scheduled(fixedRate = 4 * 60 * 60 * 1000)

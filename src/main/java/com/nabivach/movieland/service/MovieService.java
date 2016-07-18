@@ -1,5 +1,6 @@
 package com.nabivach.movieland.service;
 
+import com.nabivach.movieland.dto.MovieByIdRequest;
 import com.nabivach.movieland.dto.MovieRequest;
 import com.nabivach.movieland.dto.MovieSearchRequest;
 import com.nabivach.movieland.entity.Movie;
@@ -12,6 +13,6 @@ import java.util.List;
 public interface MovieService {
 
     List<Movie> getAllMovies(MovieRequest movieRequest);
-    Movie getMovieById(int movieId);
+    Movie getMovieById(MovieByIdRequest movieByIdRequest);
     List <Movie> getMoviesSearch(MovieSearchRequest movieSearchRequest);
 }

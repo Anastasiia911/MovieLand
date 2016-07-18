@@ -45,9 +45,10 @@ public class MovieController {
 
     @RequestMapping(value = "/movies", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<MoviePreviewDto> getMovieListJson(@RequestParam(required = false) String rating, @RequestParam(required = false) String price, @RequestParam(defaultValue = "1") int pageNumber) {
+    public List<MoviePreviewDto> getMovieListJson(@RequestParam(required = false) String rating, @RequestParam(required = false) String price, @RequestParam(defaultValue = "1") int pageNumber,
+                                                  @RequestParam(defaultValue = "UAH") String currency) {
         LOGGER.debug("Starting getting all movies in JSON");
-        MovieRequest movieRequest = movieRequestTransformer.getMovieRequest(rating, price, pageNumber);
+        MovieRequest movieRequest = movieRequestTransformer.getMovieRequest(rating, price, pageNumber, currency);
         List<Movie> movies = performanceLoggingMovieService.getAllMovies(movieRequest);
         ListTransformer<Movie, MoviePreviewDto> moviePreviewDtoListTransformer = new ListTransformer<>(moviePreviewDtoTransformer);
         return moviePreviewDtoListTransformer.transformToDto(movies);
@@ -55,9 +56,10 @@ public class MovieController {
 
     @RequestMapping(value = "/movie/{movieId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public MovieDto getMovieByIdJson(@PathVariable int movieId) {
+    public MovieDto getMovieByIdJson(@PathVariable int movieId, @RequestParam(defaultValue = "UAH") String currency) {
         LOGGER.debug("Starting getting movies by id in JSON");
-        Movie movie = performanceLoggingMovieService.getMovieById(movieId);
+        MovieByIdRequest movieByIdRequest =movieRequestTransformer.getMovieByIdRequest(movieId, currency);
+        Movie movie = performanceLoggingMovieService.getMovieById(movieByIdRequest);
         MovieDto movieDto = movieDtoTransformer.transformToDto(movie);
         return movieDto;
     }
