@@ -4,9 +4,8 @@ package com.nabivach.movieland.service;
 import java.io.IOException;
 
 public interface CurrencyService {
+    String getJsonCurrencyFromNBU() throws IOException;
 
-    double getPriceDependingOnCurrency(String ccy, double price);
 
-    double getCurrencyFromNBU(String ccy) throws IOException;
 }
 

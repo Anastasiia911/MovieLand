@@ -23,6 +23,7 @@ public class CachingGenreService implements GenreService {
 
     @Autowired
     private GenreDao genreDao;
+    
     private Map<Integer, List<Genre>> movieIdGenresCache = new ConcurrentHashMap<>();
 
         @Override
