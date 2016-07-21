@@ -1,6 +1,7 @@
 package com.nabivach.movieland.service.impl;
 
 import com.nabivach.movieland.dao.GenreDao;
+import com.nabivach.movieland.dto.MovieByIdRequest;
 import com.nabivach.movieland.entity.Genre;
 import com.nabivach.movieland.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,10 @@ public class GenericGenreService implements GenreService {
     @Autowired
     private GenreDao genreDao;
 
-    public List<Genre> getGenresForMovie(int movieId) {
-
-        return genreDao.getGenreForMovie(movieId);
+    @Override
+    public List<Genre> getGenresForMovie(MovieByIdRequest movieByIdRequest) {
+        return genreDao.getGenreForMovie(movieByIdRequest.getMovieId());
     }
-
-  }
+}
 
 

@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 
 @Service
-public class JsonReader {
-    private static final Logger LOGGER = LoggerFactory.getLogger(JsonReader.class);
+public class JsonParse {
+    private static final Logger LOGGER = LoggerFactory.getLogger(JsonParse.class);
     private ObjectMapper mapper = new ObjectMapper();
 
     public <DTO> DTO parseJson(String json, Class<DTO> clazz) throws IOException {

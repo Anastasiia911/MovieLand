@@ -3,7 +3,7 @@ package com.nabivach.movieland.controller;
 import com.nabivach.movieland.dto.ReviewDeletionRequest;
 import com.nabivach.movieland.dto.ReviewRequest;
 import com.nabivach.movieland.service.impl.PerformanceLoggingReviewService;
-import com.nabivach.movieland.util.deserializer.JsonReader;
+import com.nabivach.movieland.util.deserializer.JsonParse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class ReviewController {
     private PerformanceLoggingReviewService performanceLoggingReviewService;
 
     @Autowired
-    private JsonReader jsonReader;
+    private JsonParse jsonReader;
 
     @Autowired
     private SecurityController securityController;

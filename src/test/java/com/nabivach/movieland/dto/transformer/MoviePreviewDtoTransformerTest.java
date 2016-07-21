@@ -1,5 +1,6 @@
 package com.nabivach.movieland.dto.transformer;
 
+import com.nabivach.movieland.dto.MovieByIdRequest;
 import com.nabivach.movieland.dto.MoviePreviewDto;
 import com.nabivach.movieland.entity.Genre;
 import com.nabivach.movieland.entity.Movie;
@@ -26,7 +27,8 @@ public class MoviePreviewDtoTransformerTest {
         testGenre.setId(1);
         testGenre.setName("drama");
         GenreService genreService= mock(GenreService.class);
-        when(genreService.getGenresForMovie(anyInt())).thenReturn(Arrays.asList(testGenre));
+        MovieByIdRequest movieByIdRequest = mock(MovieByIdRequest.class);
+        when(genreService.getGenresForMovie(movieByIdRequest)).thenReturn(Arrays.asList(testGenre));
 
 
         Movie testMovie = new Movie();

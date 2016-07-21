@@ -7,8 +7,7 @@ import com.nabivach.movieland.dto.transformer.MoviePreviewDtoTransformer;
 import com.nabivach.movieland.dto.transformer.MovieRequestTransformer;
 import com.nabivach.movieland.entity.Movie;
 import com.nabivach.movieland.service.impl.PerformanceLoggingMovieService;
-import com.nabivach.movieland.service.impl.PerformanceLoggingReviewService;
-import com.nabivach.movieland.util.deserializer.JsonReader;
+import com.nabivach.movieland.util.deserializer.JsonParse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ public class MovieController {
 
 
     @Autowired
-    private JsonReader jsonReader;
+    private JsonParse jsonReader;
 
     @RequestMapping(value = "/movies", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

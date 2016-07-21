@@ -1,5 +1,6 @@
 package com.nabivach.movieland.dto.transformer;
 
+import com.nabivach.movieland.dto.MovieByIdRequest;
 import com.nabivach.movieland.dto.MovieDto;
 import com.nabivach.movieland.entity.Country;
 import com.nabivach.movieland.entity.Genre;
@@ -27,26 +28,29 @@ public class MovieDtoTransformerTest {
         country.setName("USA");
         country.setId(1);
         CountryService countryService = mock(CountryService.class);
-        when(countryService.getCountryForMovies(anyInt())).thenReturn(Arrays.asList(country));
+
+        MovieByIdRequest movieByIdRequest = mock(MovieByIdRequest.class);
+        when(movieByIdRequest.getMovieId()).thenReturn(1);
+        when(countryService.getCountryForMovies(movieByIdRequest)).thenReturn(Arrays.asList(country));
 
         Review review = new Review();
         review.setId(1);
         review.setDescription("Good movie");
         ReviewService reviewService = mock(ReviewService.class);
-        when(reviewService.getReviewForMovies(anyInt())).thenReturn(Arrays.asList(review));
+        when(reviewService.getReviewForMovies(movieByIdRequest)).thenReturn(Arrays.asList(review));
 
         Genre genre = new Genre();
         genre.setId(1);
         genre.setName("drama");
         GenreService genreService = mock(GenreService.class);
-        when(genreService.getGenresForMovie(anyInt())).thenReturn(Arrays.asList(genre));
+        when(genreService.getGenresForMovie(movieByIdRequest)).thenReturn(Arrays.asList(genre));
 
         Movie testMovie = new Movie();
         testMovie.setName("Testmovie");
         testMovie.setOriginalName("Movie");
-        testMovie.setGenre(genreService.getGenresForMovie(1));
+        testMovie.setGenre(genreService.getGenresForMovie(movieByIdRequest));
         testMovie.setReleaseYear(2000);
-        testMovie.setCountry(countryService.getCountryForMovies(1));
+        testMovie.setCountry(countryService.getCountryForMovies(movieByIdRequest));
         testMovie.setRating(9);
 //Execute
         MovieDtoTransformer movieDtoTransformer = new MovieDtoTransformer();
