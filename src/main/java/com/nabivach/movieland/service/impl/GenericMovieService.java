@@ -24,9 +24,15 @@ public class GenericMovieService implements MovieService {
     private CountryService countryService;
     @Autowired
     private ReviewService reviewService;
+    @Autowired
+    private CachingCurrencyService cachingCurrencyService;
 
     public List<Movie> getAllMovies(MovieRequest movieRequest) {
-        return movieDao.getAllMovies(movieRequest);
+        List<Movie> moviesList  = movieDao.getAllMovies(movieRequest);
+        for (Movie movie:moviesList){
+            movie.setPrice(getConvertedPrice(movie.getPrice(), movieRequest.getCurrency()));
+        }
+        return moviesList;
     }
 
     public Movie getMovieById(MovieByIdRequest movieByIdRequest) {
@@ -34,11 +40,16 @@ public class GenericMovieService implements MovieService {
         movie.setGenre(cachingGenreService.getGenresForMovie(movieByIdRequest));
         movie.setCountry(countryService.getCountryForMovies(movieByIdRequest));
         movie.setReview(reviewService.getReviewForMovies(movieByIdRequest));
+        movie.setPrice(getConvertedPrice(movie.getPrice(), movieByIdRequest.getCurrency()));
         return movie;
     }
 
     public List<Movie> getMoviesSearch(MovieSearchRequest movieSearchRequest) {
         return movieDao.getMoviesSearch(movieSearchRequest);
+    }
+
+    private double getConvertedPrice(Double price, String ccy){
+        return price * cachingCurrencyService.getRateByRequest(ccy);
     }
 
 }
